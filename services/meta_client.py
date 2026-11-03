@@ -62,32 +62,51 @@ class MetaSchedulerClient:
                 "dry_run": True
             }
 
-        # Live execution branch
-        url = f"{self.BASE_URL}/{self.page_id}/photos"
-        payload = {
+        # Live execution branch (Two-step feed scheduling for Meta Business Suite Planner visibility)
+        print(f"[Meta Client] Step 1/2: Uploading unpublished photo media...")
+        photo_url = f"{self.BASE_URL}/{self.page_id}/photos"
+        mime_type = "image/png" if image_path.suffix.lower() == ".png" else "image/jpeg"
+        
+        with open(image_path, "rb") as img_file:
+            files = {"source": (image_path.name, img_file, mime_type)}
+            photo_resp = requests.post(
+                photo_url,
+                data={"access_token": self.access_token, "published": "false"},
+                files=files,
+                timeout=60
+            )
+
+        if photo_resp.status_code != 200:
+            try:
+                err_data = photo_resp.json()
+            except Exception:
+                err_data = photo_resp.text
+            raise RuntimeError(f"Facebook Photo Upload Error (HTTP {photo_resp.status_code}): {err_data}")
+
+        media_fbid = photo_resp.json().get("id")
+        print(f"[Meta Client] Step 2/2: Scheduling feed post to Meta Business Suite Planner (Slot: {sched_iso})...")
+
+        import json
+        feed_url = f"{self.BASE_URL}/{self.page_id}/feed"
+        feed_payload = {
             "access_token": self.access_token,
             "message": caption,
             "published": "false",
-            "scheduled_publish_time": str(scheduled_timestamp)
+            "scheduled_publish_time": str(scheduled_timestamp),
+            "attached_media": json.dumps([{"media_fbid": media_fbid}])
         }
 
-        print(f"[Meta Client] Transmitting live photo post to Facebook (Slot: {sched_iso})...")
-
-        mime_type = "image/png" if image_path.suffix.lower() == ".png" else "image/jpeg"
-        with open(image_path, "rb") as img_file:
-            files = {"source": (image_path.name, img_file, mime_type)}
-            response = requests.post(url, data=payload, files=files, timeout=60)
-
-        if response.status_code == 200:
-            result = response.json()
-            print(f"[Meta Client] SUCCESS! Post scheduled with Meta Photo ID: {result.get('id')}")
+        feed_resp = requests.post(feed_url, data=feed_payload, timeout=30)
+        if feed_resp.status_code == 200:
+            result = feed_resp.json()
+            print(f"[Meta Client] SUCCESS! Scheduled Feed Post ID: {result.get('id')}")
             return result
         else:
             try:
-                err_data = response.json()
+                err_data = feed_resp.json()
             except Exception:
-                err_data = response.text
-            raise RuntimeError(f"Facebook Graph API Error (HTTP {response.status_code}): {err_data}")
+                err_data = feed_resp.text
+            raise RuntimeError(f"Facebook Feed Schedule Error (HTTP {feed_resp.status_code}): {err_data}")
 
     def get_live_scheduled_posts(self) -> List[Dict[str, Any]]:
         """Queries Facebook for the page's currently scheduled posts to support reconciliation."""
