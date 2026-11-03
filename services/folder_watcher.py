@@ -1,12 +1,14 @@
 """
-services/folder_watcher.py - Scans queue folders, validates post packages, and archives scheduled items
+services/folder_watcher.py - Ingests artwork packages, validates file integrity, and archives safely
 """
 import os
 import json
 import shutil
+import time
 from pathlib import Path
 from typing import List, Dict, Any, Optional
-from config import EVERGREEN_QUEUE, TIMELY_QUEUE, SCHEDULED_DIR
+from PIL import Image
+from config import EVERGREEN_QUEUE, TIMELY_QUEUE, SCHEDULED_DIR, DRY_RUN
 from services.db_manager import is_post_processed
 
 class PostPackage:
@@ -29,38 +31,41 @@ class PostPackage:
         self.metadata = metadata
 
 class FolderWatcher:
-    """Monitors queue/evergreen and queue/timely for newly prepared artwork packages."""
+    """Monitors queue/evergreen and queue/timely with integrity verification."""
 
     SUPPORTED_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
 
     @classmethod
-    def scan_queue(cls) -> List[PostPackage]:
-        """Scans both evergreen and timely directories and returns valid unposted packages."""
+    def scan_queue(cls, is_simulation: bool = DRY_RUN) -> List[PostPackage]:
+        """Scans queue directories and returns verified, unposted packages."""
         packages = []
-        packages.extend(cls._scan_category_dir(EVERGREEN_QUEUE, "evergreen"))
-        packages.extend(cls._scan_category_dir(TIMELY_QUEUE, "timely"))
+        packages.extend(cls._scan_category_dir(EVERGREEN_QUEUE, "evergreen", is_simulation))
+        packages.extend(cls._scan_category_dir(TIMELY_QUEUE, "timely", is_simulation))
         return packages
 
     @classmethod
-    def _scan_category_dir(cls, category_dir: Path, category: str) -> List[PostPackage]:
+    def _scan_category_dir(cls, category_dir: Path, category: str, is_simulation: bool) -> List[PostPackage]:
         found = []
         if not category_dir.exists():
             return found
 
         for entry in sorted(category_dir.iterdir()):
-            if entry.is_dir():
-                pkg = cls._parse_directory_package(entry, category)
+            if entry.is_dir() and not entry.name.startswith("."):
+                pkg = cls._parse_directory_package(entry, category, is_simulation)
                 if pkg:
                     found.append(pkg)
         return found
 
     @classmethod
-    def _parse_directory_package(cls, dir_path: Path, category: str) -> Optional[PostPackage]:
+    def _parse_directory_package(cls, dir_path: Path, category: str, is_simulation: bool) -> Optional[PostPackage]:
         post_dir = dir_path.name
 
-        # Skip if already recorded as scheduled
-        if is_post_processed(post_dir):
+        # Skip if already scheduled/published (simulation check obeys is_simulation flag)
+        if is_post_processed(post_dir, include_simulated=is_simulation):
             return None
+
+        # Check for optional ready.flag or .ready file
+        ready_flag = (dir_path / "ready.flag").exists() or (dir_path / ".ready").exists()
 
         # Find image file
         image_file = None
@@ -69,18 +74,32 @@ class FolderWatcher:
                 image_file = file
                 break
 
-        if not image_file or image_file.stat().st_size < 1000:
-            return None  # No valid image or corrupt/empty file
+        if not image_file or image_file.stat().st_size < 500:
+            return None  # Missing or empty file
+
+        # If no explicit ready flag, verify the file isn't actively being written (age > 2 seconds)
+        if not ready_flag:
+            file_age = time.time() - image_file.stat().st_mtime
+            if file_age < 2.0:
+                print(f"[Watcher] Skipping '{post_dir}': file actively being written (age={file_age:.1f}s)")
+                return None
+
+        # Verify image integrity via PIL
+        try:
+            with Image.open(image_file) as img:
+                img.verify()
+        except Exception as e:
+            print(f"[Watcher] Image corruption detected in '{post_dir}': {e}")
+            return None
 
         # Find caption file
         caption_file = dir_path / "caption.txt"
         if not caption_file.exists():
-            # Try any .txt file
             txt_files = list(dir_path.glob("*.txt"))
             caption_file = txt_files[0] if txt_files else None
 
         if not caption_file:
-            return None  # Caption required
+            return None
 
         try:
             caption = caption_file.read_text(encoding="utf-8").strip()
@@ -90,7 +109,7 @@ class FolderWatcher:
         if not caption:
             return None
 
-        # Parse optional metadata
+        # Parse metadata
         metadata = {}
         meta_file = dir_path / "metadata.json"
         if meta_file.exists():
@@ -99,7 +118,6 @@ class FolderWatcher:
             except Exception:
                 pass
 
-        # Determine title
         title = metadata.get("title") or dir_path.name.replace("_", " ").replace("-", " ").title()
 
         return PostPackage(
@@ -113,14 +131,23 @@ class FolderWatcher:
         )
 
     @classmethod
-    def archive_package(cls, pkg: PostPackage):
-        """Moves a scheduled package from queue/ to scheduled/."""
+    def archive_package(cls, pkg: PostPackage, is_simulation: bool = DRY_RUN) -> Path:
+        """
+        Moves scheduled package to scheduled/ in live mode.
+        In simulation mode, leaves the package safely in queue/ and returns original image path.
+        """
+        if is_simulation:
+            print(f"[Watcher - SIMULATION] Package '{pkg.post_dir}' preserved in queue for future live runs.")
+            return pkg.image_path
+
         target_category_dir = SCHEDULED_DIR / pkg.category
         target_category_dir.mkdir(parents=True, exist_ok=True)
-        dest = target_category_dir / pkg.package_path.name
+        dest_dir = target_category_dir / pkg.package_path.name
 
-        if dest.exists():
-            shutil.rmtree(dest)
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
 
-        shutil.move(str(pkg.package_path), str(dest))
-        print(f"[Watcher] Moved '{pkg.post_dir}' to {dest}")
+        shutil.move(str(pkg.package_path), str(dest_dir))
+        final_image_path = dest_dir / pkg.image_path.name
+        print(f"[Watcher] Successfully moved '{pkg.post_dir}' to {dest_dir}")
+        return final_image_path

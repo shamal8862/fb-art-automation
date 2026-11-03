@@ -27,10 +27,10 @@ DAILY_POST_LIMIT = int(os.getenv("DAILY_POST_LIMIT", "6"))
 EVERGREEN_POSTS_PER_DAY = int(os.getenv("EVERGREEN_POSTS_PER_DAY", "3"))
 
 # Preferred UTC hours for posts
-# Default Evergreen slots: 09:00 UTC (US morning/EU afternoon), 17:00 UTC (US afternoon/EU evening), 22:00 UTC (AU/Asia morning)
 EVERGREEN_HOURS_UTC = [int(h.strip()) for h in os.getenv("EVERGREEN_HOURS_UTC", "9,17,22").split(",") if h.strip()]
-
-# Default Timely slots: 13:00 UTC, 20:00 UTC
 TIMELY_HOURS_UTC = [int(h.strip()) for h in os.getenv("TIMELY_HOURS_UTC", "13,20").split(",") if h.strip()]
+
+# Watch loop interval in minutes
+WATCH_INTERVAL_MINUTES = int(os.getenv("WATCH_INTERVAL_MINUTES", "30"))
 
 BRAND_NAME = os.getenv("BRAND_NAME", "The Inked Chronicle").strip()
