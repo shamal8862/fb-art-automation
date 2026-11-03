@@ -20,6 +20,7 @@ load_dotenv(BASE_DIR / ".env")
 
 FB_PAGE_ID = os.getenv("FB_PAGE_ID", "").strip()
 FB_PAGE_ACCESS_TOKEN = os.getenv("FB_PAGE_ACCESS_TOKEN", "").strip()
+IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
 DRY_RUN = os.getenv("DRY_RUN", "True").lower() in ("true", "1", "yes")
 
 # Scheduling & Volume Controls
