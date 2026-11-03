@@ -87,8 +87,8 @@ def record_pending_post(
         conn.commit()
         return cursor.lastrowid
 
-def confirm_post_scheduled(post_dir: str, meta_fbid: str, final_image_path: str):
-    """Phase 2: Confirms successful scheduling with Facebook's returned ID and updated path."""
+def confirm_post_scheduled(post_dir: str, meta_fbid: str, final_image_path: str, cdn_image_url: Optional[str] = None, ig_status: str = "scheduled"):
+    """Phase 2: Confirms successful scheduling with Facebook's returned ID, CDN URL, and updated path."""
     now_iso = datetime.now(timezone.utc).isoformat()
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -97,9 +97,11 @@ def confirm_post_scheduled(post_dir: str, meta_fbid: str, final_image_path: str)
             SET status = 'scheduled',
                 meta_fbid = ?,
                 image_path = ?,
+                cdn_image_url = COALESCE(?, cdn_image_url),
+                ig_status = COALESCE(?, ig_status),
                 updated_at = ?
             WHERE post_dir = ?
-        """, (meta_fbid, final_image_path, now_iso, post_dir))
+        """, (meta_fbid, final_image_path, cdn_image_url, ig_status, now_iso, post_dir))
         conn.commit()
 
 def mark_post_failed(post_dir: str, error_message: str):

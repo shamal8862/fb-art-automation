@@ -18,7 +18,8 @@ from services.db_manager import (
     confirm_post_scheduled,
     mark_post_failed,
     get_pending_posts,
-    list_active_schedule
+    list_active_schedule,
+    get_connection
 )
 
 LOCK_FILE = DATA_DIR / "scheduler.lock"
@@ -52,6 +53,39 @@ def print_banner():
     print(f" Mode: {mode} | Target Page ID: {FB_PAGE_ID or 'Not Set'}")
     print("=" * 68)
 
+def publish_due_instagram_posts(meta_client: MetaSchedulerClient):
+    """Checks for any posts whose scheduled timestamp has arrived and publishes to Instagram."""
+    if DRY_RUN:
+        return
+    now_ts = int(datetime.now(timezone.utc).timestamp())
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT * FROM scheduled_posts
+            WHERE status = 'scheduled'
+              AND scheduled_timestamp <= ?
+              AND (ig_status IS NULL OR ig_status = 'scheduled')
+              AND cdn_image_url IS NOT NULL
+              AND is_simulation = 0
+        """, (now_ts,))
+        due_posts = [dict(r) for r in cursor.fetchall()]
+
+    for p in due_posts:
+        try:
+            print(f"[Instagram Auto-Publisher] Slot arrived for '{p['title']}'. Publishing to @doodlore_arts...")
+            res = meta_client.publish_to_instagram(p["cdn_image_url"], p["caption"])
+            ig_id = res.get("id")
+            with get_connection() as conn:
+                conn.cursor().execute("""
+                    UPDATE scheduled_posts
+                    SET ig_media_id = ?, ig_status = 'published'
+                    WHERE id = ?
+                """, (ig_id, p["id"]))
+                conn.commit()
+            print(f"[Instagram Auto-Publisher] [OK] Published '{p['title']}' to Instagram (ID: {ig_id})")
+        except Exception as e:
+            print(f"[Instagram Auto-Publisher] [ERROR] Could not publish '{p['title']}' to Instagram: {e}")
+
 def reconcile_pending_posts(meta_client: MetaSchedulerClient):
     """Reconciles interrupted uploads by checking Meta's live scheduled queue."""
     pending = get_pending_posts(include_simulated=DRY_RUN)
@@ -83,8 +117,9 @@ def run_scheduler_cycle():
         print_banner()
         meta_client = MetaSchedulerClient()
 
-        # Step 1: Reconcile any prior pending posts
+        # Step 1: Reconcile any prior pending posts & check due Instagram posts
         reconcile_pending_posts(meta_client)
+        publish_due_instagram_posts(meta_client)
 
         # Step 2: Scan queue
         print("[1/4] Scanning queue folders for verified artwork packages...")
@@ -130,14 +165,17 @@ def run_scheduler_cycle():
                 )
 
                 meta_fbid = meta_res.get("id") or "simulated_id"
+                cdn_image_url = meta_res.get("cdn_image_url")
 
                 # Archive package (only moves in LIVE mode, stays in queue in DRY RUN)
                 final_image_path = FolderWatcher.archive_package(pkg, is_simulation=DRY_RUN)
 
-                # Confirm in database
-                confirm_post_scheduled(pkg.post_dir, meta_fbid, str(final_image_path))
+                # Confirm in database (both FB and IG scheduled)
+                confirm_post_scheduled(pkg.post_dir, meta_fbid, str(final_image_path), cdn_image_url=cdn_image_url, ig_status="scheduled")
                 successful_count += 1
                 print(f"     [OK] Confirmed with Meta FBID: {meta_fbid}")
+                if cdn_image_url:
+                    print(f"     [OK] Instagram CDN Bridge Ready for slot: {slot_iso}")
 
             except Exception as e:
                 print(f"     [ERROR] Failed to schedule '{pkg.title}': {e}")
