@@ -1,0 +1,17 @@
+{
+  "post_id": "doodlore-2026-11-03_b04_remembrance_poppy",
+  "title": "A Quiet Remembrance",
+  "type": "timely",
+  "batch": "2026-11-03-b04",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "alt_text": "One loose simple red remembrance poppy flower beside an unmarked closed envelope on plain drawn surface. Red pastel only on petals, sparse graphite stem, no text medals uniforms national flags or actual person's objects.",
+  "sources": [
+    "https://www.gov.uk/guidance/national-service-of-remembrance-sunday-8-november-2026"
+  ],
+  "verified_at": "2026-11-03",
+  "suggested_publish_date": "2026-11-07",
+  "expires_at": "2026-11-09",
+  "generation_method": "built-in image_gen",
+  "note": "Suggested publication dates are editorial guidance only; scheduler enforcement not implemented."
+}

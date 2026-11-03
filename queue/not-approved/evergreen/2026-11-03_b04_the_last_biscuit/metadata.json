@@ -1,0 +1,15 @@
+{
+  "post_id": "doodlore-2026-11-03_b04_the_last_biscuit",
+  "title": "The Last Biscuit",
+  "type": "evergreen",
+  "batch": "2026-11-03-b04",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "alt_text": "Two adult friends seated opposite at a little cafe table, one sliding the last biscuit on a small plate toward the other. Simple profile gestures, minimal faces, loose coat contours, two tiny drawn cups. No detailed cafe.",
+  "sources": [],
+  "verified_at": null,
+  "suggested_publish_date": null,
+  "expires_at": null,
+  "generation_method": "built-in image_gen",
+  "note": "Suggested publication dates are editorial guidance only; scheduler enforcement not implemented."
+}
