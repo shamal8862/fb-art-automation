@@ -31,6 +31,12 @@ class PostPackage:
         self.caption = caption
         self.title = title
         self.metadata = metadata
+        self.timing_mode = metadata.get("timing_mode", "any")
+        self.target_date = metadata.get("target_date")
+        self.window_start = metadata.get("window_start")
+        self.window_end = metadata.get("window_end")
+        self.strict_date = metadata.get("strict_date", True)
+        self.content_pillar = metadata.get("content_pillar")
 
 class FolderWatcher:
     """Monitors queue/evergreen and queue/timely with integrity verification."""
@@ -121,7 +127,50 @@ class FolderWatcher:
             except Exception:
                 pass
 
-        title = metadata.get("title") or dir_path.name.replace("_", " ").replace("-", " ").title()
+        # Parse timing rules from folder name prefix
+        import re
+        folder_name = dir_path.name
+        timing_mode = "any"
+        target_date = None
+        window_start = None
+        window_end = None
+        strict_date = True
+
+        on_match = re.match(r"^ON-(\d{4}-\d{2}-\d{2})(?:__(.+))?$", folder_name, re.IGNORECASE)
+        win_match = re.match(r"^WINDOW-(\d{4}-\d{2}-\d{2})_to_(\d{4}-\d{2}-\d{2})(?:__(.+))?$", folder_name, re.IGNORECASE)
+
+        if on_match:
+            timing_mode = "exact_date"
+            target_date = on_match.group(1)
+            strict_date = True
+        elif win_match:
+            timing_mode = "window"
+            window_start = win_match.group(1)
+            window_end = win_match.group(2)
+            strict_date = False
+
+        # Metadata can enrich or override
+        if "publish_on" in metadata:
+            timing_mode = "exact_date"
+            target_date = metadata["publish_on"]
+        if "publish_not_before" in metadata and "publish_not_after" in metadata:
+            timing_mode = "window"
+            window_start = metadata["publish_not_before"]
+            window_end = metadata["publish_not_after"]
+        if "strict_date" in metadata:
+            strict_date = bool(metadata["strict_date"])
+
+        metadata["timing_mode"] = timing_mode
+        metadata["target_date"] = target_date
+        metadata["window_start"] = window_start
+        metadata["window_end"] = window_end
+        metadata["strict_date"] = strict_date
+
+        if metadata.get("title"):
+            title = metadata["title"]
+        else:
+            cleaned_name = re.sub(r"^(ON-[0-9-]+|WINDOW-[0-9-_to]+|ANY)__", "", dir_path.name, flags=re.IGNORECASE)
+            title = cleaned_name.replace("_", " ").replace("-", " ").title()
 
         return PostPackage(
             post_dir=post_dir,

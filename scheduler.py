@@ -155,12 +155,13 @@ def run_scheduler_cycle():
 
         for pkg in packages:
             try:
-                # 1. Determine optimal slot
-                slot_timestamp = CalendarPlanner.get_next_slot(pkg.category)
+                # 1. Determine optimal slot (honors exact date, window, or category defaults)
+                slot_timestamp = CalendarPlanner.get_slot_for_package(pkg)
                 slot_iso = datetime.fromtimestamp(slot_timestamp, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
                 carousel_tag = f" [Carousel: {len(pkg.image_paths)} slides]" if getattr(pkg, "is_carousel", False) else ""
-                print(f"\n---> Processing: '{pkg.title}'{carousel_tag}")
+                timing_tag = f" [{pkg.timing_mode.upper()}]" if getattr(pkg, "timing_mode", "any") != "any" else ""
+                print(f"\n---> Processing: '{pkg.title}'{carousel_tag}{timing_tag}")
                 print(f"     Target Slot: {slot_iso} ({pkg.category})")
 
                 # Phase 1: Record pending row before calling Meta
@@ -221,12 +222,12 @@ def show_active_schedule():
     print("-" * 68)
 
 def watch_loop():
-    print(f"Starting Facebook Art Scheduler in WATCH mode (interval: {WATCH_INTERVAL_MINUTES}m)...")
+    print("Starting Facebook Art Scheduler in WATCH mode (loop interval: 2 minutes)...")
     try:
         while True:
             run_scheduler_cycle()
-            print(f"\nSleeping for {WATCH_INTERVAL_MINUTES} minutes until next scan. (Ctrl+C to stop)...")
-            time.sleep(WATCH_INTERVAL_MINUTES * 60)
+            print("\nSleeping for 2 minutes until next check. (Ctrl+C to stop)...")
+            time.sleep(120)
     except KeyboardInterrupt:
         print("\nWatch loop stopped by user.")
 

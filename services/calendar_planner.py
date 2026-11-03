@@ -20,6 +20,99 @@ class CalendarPlanner:
     """Computes exact future timestamps for upcoming posts ensuring smooth calendar spread without collision."""
 
     @staticmethod
+    def get_slot_for_package(pkg) -> int:
+        """
+        Determines the optimal slot for a PostPackage, strictly honoring exact-day holds (ON-YYYY-MM-DD),
+        flexible date windows (WINDOW-..._to_...), or standard sequential evergreen/timely queues.
+        """
+        now = datetime.now(timezone.utc)
+        min_future_time = now + timedelta(minutes=15)
+
+        timing_mode = getattr(pkg, "timing_mode", "any")
+
+        # 1. Exact-day hold (e.g. ON-2026-11-10 or publish_on: "2026-11-10")
+        if timing_mode == "exact_date" and getattr(pkg, "target_date", None):
+            return CalendarPlanner._get_exact_date_slot(pkg, now, min_future_time)
+
+        # 2. Window hold (e.g. WINDOW-2026-11-06_to_2026-11-08)
+        if timing_mode == "window" and getattr(pkg, "window_start", None) and getattr(pkg, "window_end", None):
+            return CalendarPlanner._get_window_slot(pkg, now, min_future_time)
+
+        # 3. Standard category queue (evergreen / timely)
+        category = getattr(pkg, "category", "evergreen")
+        return CalendarPlanner.get_next_slot(category)
+
+    @staticmethod
+    def _get_exact_date_slot(pkg, now: datetime, min_future_time: datetime) -> int:
+        """
+        Finds an unoccupied slot on the EXACT specified target date.
+        If strict_date is True and the date is already in the past, raises ValueError.
+        """
+        target_str = pkg.target_date
+        try:
+            target_date = datetime.strptime(target_str, "%Y-%m-%d").date()
+        except ValueError:
+            raise ValueError(f"Invalid target_date format '{target_str}'. Expected YYYY-MM-DD.")
+
+        today = now.date()
+        if target_date < today:
+            if getattr(pkg, "strict_date", True):
+                raise ValueError(f"Strict exact-date post '{pkg.title}' target date {target_str} has already passed.")
+            target_date = today
+
+        # Check candidate hours on target date (honor target_time_utc if specified)
+        pref_hours = []
+        target_hour = pkg.metadata.get("target_time_utc") if hasattr(pkg, "metadata") else None
+        if target_hour is not None:
+            pref_hours.append(int(target_hour))
+        pref_hours.extend(TIMELY_HOURS_UTC if pkg.category == "timely" else EVERGREEN_HOURS_UTC)
+        pref_hours = sorted(list(dict.fromkeys(pref_hours)))
+
+        for hour in pref_hours:
+            slot_dt = datetime(target_date.year, target_date.month, target_date.day, hour, 0, 0, tzinfo=timezone.utc)
+            slot_ts = int(slot_dt.timestamp())
+            if slot_dt > min_future_time and not is_timestamp_occupied(slot_ts, tolerance_minutes=25):
+                print(f"[Calendar Planner] Exact-Date Slot Booked: {slot_dt.strftime('%Y-%m-%d %H:%M:%S UTC')} for '{pkg.title}'")
+                return slot_ts
+
+        # If all preferred hours are occupied or passed today, try offset hours on target date
+        if target_date == today:
+            for offset in [25, 60, 120, 180, 240, 360]:
+                slot_dt = now + timedelta(minutes=offset)
+                if slot_dt.date() == target_date:
+                    slot_ts = int(slot_dt.timestamp())
+                    if not is_timestamp_occupied(slot_ts, tolerance_minutes=20):
+                        return slot_ts
+        else:
+            for hour in range(8, 23):
+                slot_dt = datetime(target_date.year, target_date.month, target_date.day, hour, 0, 0, tzinfo=timezone.utc)
+                slot_ts = int(slot_dt.timestamp())
+                if slot_dt > min_future_time and not is_timestamp_occupied(slot_ts, tolerance_minutes=20):
+                    return slot_ts
+
+        fallback_dt = datetime(target_date.year, target_date.month, target_date.day, 12, 0, 0, tzinfo=timezone.utc)
+        return int(fallback_dt.timestamp())
+
+    @staticmethod
+    def _get_window_slot(pkg, now: datetime, min_future_time: datetime) -> int:
+        """Finds an unoccupied slot inside a flexible window [window_start, window_end]."""
+        start_date = datetime.strptime(pkg.window_start, "%Y-%m-%d").date()
+        end_date = datetime.strptime(pkg.window_end, "%Y-%m-%d").date()
+
+        current_d = max(start_date, now.date())
+        while current_d <= end_date:
+            pref_hours = TIMELY_HOURS_UTC if pkg.category == "timely" else EVERGREEN_HOURS_UTC
+            for hour in sorted(pref_hours):
+                slot_dt = datetime(current_d.year, current_d.month, current_d.day, hour, 0, 0, tzinfo=timezone.utc)
+                slot_ts = int(slot_dt.timestamp())
+                if slot_dt > min_future_time and not is_timestamp_occupied(slot_ts, tolerance_minutes=25):
+                    print(f"[Calendar Planner] Window Slot Booked: {slot_dt.strftime('%Y-%m-%d %H:%M:%S UTC')} for '{pkg.title}'")
+                    return slot_ts
+            current_d += timedelta(days=1)
+
+        return CalendarPlanner.get_next_slot(pkg.category)
+
+    @staticmethod
     def get_next_slot(category: str = "evergreen") -> int:
         """Determines the next optimal, unoccupied Unix timestamp for a post."""
         now = datetime.now(timezone.utc)

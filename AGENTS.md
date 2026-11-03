@@ -23,3 +23,7 @@ The user will manually apply the platform AI label. Do not include AI-created di
 
 ## Natural variation in photo staging (latest)
 Keep the recognizable oak desk, studio materials and left-side daylight, but do not repeat a frozen composition. Vary camera angle, camera distance, paper rotation, subject scale and crop across a batch. Alternate close details, overhead and oblique seated views. The sage mug is optional: often omit it, change its handle direction, or move it naturally around the desk. Pens and erasers may also move or be absent. This overrides older rules fixing movable desk props in identical positions. Keep the window/room geometry and believable shadows consistent. No artist hands by default. Review adjacent images together for repetitive framing.
+
+Read brand/CONTENT_PILLARS.md when planning batches. Include film/comic character studies with sourced facts, verified film releases, cultural epic art and anniversary tributes alongside existing themes. Follow ANY__, WINDOW-..., ON-... folder conventions. The scheduler fully enforces exact dates and window holds automatically when moved to queue/. Never confuse fictional character death with actor death.
+
+Read brand/CAROUSELS.md for multi-image posts. Use 01.png..10.png with matching dimensions/aspect ratio; only final intended slides at package root. Keep alternatives outside package. Single-image and carousel packages both require manual approval under queue/not-approved.
