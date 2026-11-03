@@ -1,0 +1,28 @@
+{
+  "post_id": "doodlore-ON-2026-11-07__anniversary-tribute__leonard-cohen__b05-07",
+  "title": "Leonard Cohen: Ten Years On",
+  "type": "timely",
+  "content_pillar": "anniversary_tribute",
+  "batch": "05",
+  "ai_generated": true,
+  "review_status": "pending_manual_approval",
+  "sources": [
+    "https://thejewishmuseum.org/wp-content/uploads/2025/06/LeonardCohen_WallTexts_FINAL.pdf"
+  ],
+  "verified_at": "2026-11-03",
+  "created_at": "2026-11-03",
+  "format": "single",
+  "slide_count": 1,
+  "slides": [
+    {
+      "filename": "image.png",
+      "alt_text": "Symbolic fedora, stage microphone and notebook tribute, not personal belongings.",
+      "width": 1122,
+      "height": 1402
+    }
+  ],
+  "publish_on": "2026-11-07",
+  "strict_date": true,
+  "date_basis": "Date of death November 7, 2016, Jewish Museum chronology; tenth anniversary",
+  "publish_timezone": "UTC"
+}

@@ -1,0 +1,24 @@
+{
+  "post_id": "doodlore-ANY__character-study__professor-x__b05-05",
+  "title": "Professor X: The Teacher",
+  "type": "evergreen",
+  "content_pillar": "character_study",
+  "batch": "05",
+  "ai_generated": true,
+  "review_status": "pending_manual_approval",
+  "sources": [
+    "https://share.marvel.com/comics/discover/1378/professor-x"
+  ],
+  "verified_at": "2026-11-03",
+  "created_at": "2026-11-03",
+  "format": "single",
+  "slide_count": 1,
+  "slides": [
+    {
+      "filename": "image.png",
+      "alt_text": "Generic comic-inspired bald adult Professor Charles Xavier in a simple wheelchair beside a small chalkboard with only faint abstract diagram, hand thoughtfully touching temple, calm teacher expression, blue and violet ballpoint loose contours, no Patrick Stewart or James McAvoy likeness, no death or injury.",
+      "width": 1122,
+      "height": 1402
+    }
+  ]
+}

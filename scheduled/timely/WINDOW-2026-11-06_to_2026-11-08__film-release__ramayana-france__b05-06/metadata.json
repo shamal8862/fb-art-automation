@@ -1,0 +1,42 @@
+{
+  "post_id": "doodlore-WINDOW-2026-11-06_to_2026-11-08__film-release__ramayana-france__b05-06",
+  "title": "Ramayana: Three Character Interpretations",
+  "type": "timely",
+  "content_pillar": "film_release",
+  "batch": "05",
+  "ai_generated": true,
+  "review_status": "pending_manual_approval",
+  "sources": [
+    "https://www.sonypictures.fr/film/ramayana-lavenement-dune-legende",
+    "https://www.metmuseum.org/exhibitions/listings/2019/sita-and-rama-ramayana-indian-painting?sf106311263=1"
+  ],
+  "verified_at": "2026-11-03",
+  "created_at": "2026-11-03",
+  "format": "carousel",
+  "slide_count": 3,
+  "slides": [
+    {
+      "filename": "01.png",
+      "alt_text": "Respectful original traditional-epic interpretation of Rama as adult Indian prince holding bow lowered peacefully beside him, simple draped clothing, tied hair, composed expression, spare forest outline. Blue teal saffron coloured ballpoint strokes, simplified jewelry and costume. Not an actor likeness or film costume, no battle, loose linework.",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "filename": "02.png",
+      "alt_text": "Respectful original interpretation of adult Sita standing beside an ashoka-like leafy branch, simple draped sari and serene dignified face, hand lightly holding fabric, spare leaves. Magenta violet green coloured BALLPOINT lines, no dense ornament or actor likeness. Same paper medium and loose level as Rama.",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "filename": "03.png",
+      "alt_text": "Ravana: central crowned regal face with nine additional crowned profiles; traditional interpretation.",
+      "width": 1122,
+      "height": 1402
+    }
+  ],
+  "publish_not_before": "2026-11-06",
+  "publish_not_after": "2026-11-08",
+  "strict_date": false,
+  "publish_timezone": "UTC",
+  "release_market": "France"
+}
