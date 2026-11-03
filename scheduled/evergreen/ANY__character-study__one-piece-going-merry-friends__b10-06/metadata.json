@@ -1,0 +1,22 @@
+{
+  "title": "Home Aboard the Merry",
+  "type": "evergreen",
+  "post_id": "ANY__character-study__one-piece-going-merry-friends__b10-06",
+  "content_pillar": "character_study",
+  "character_version": "Early One Piece animated series, Going Merry era",
+  "batch": "10",
+  "created_at": "2026-11-04",
+  "verified_at": "2026-11-04",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "fan_art": true,
+  "format": "single",
+  "alt_text": "Loose coloured ink drawing of Luffy, Zoro, Nami, Usopp, Sanji and Chopper laughing together aboard the Going Merry, on photographed ivory paper.",
+  "sources": [
+    "https://one-piece.com/character/Going_Merry/index.html",
+    "https://store.bandainamcoent.eu/one-piece-going-merry/"
+  ],
+  "publish_on": "2026-11-23",
+  "target_time_utc": 17,
+  "timing_mode": "exact_date"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Friends Along the Way",
+  "type": "evergreen",
+  "post_id": "ANY__character-study__pokemon-traveling-friends__b10-05",
+  "batch": "10",
+  "content_pillar": "character_study",
+  "character_version": "Classic original Pokemon animated series",
+  "created_at": "2026-11-04",
+  "verified_at": "2026-11-04",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "fan_art": true,
+  "format": "single",
+  "alt_text": "Loose coloured ink drawing of Ash, Misty and Brock resting beside a woodland stream while Pikachu drinks at the edge, on photographed ivory sketchbook paper.",
+  "sources": [
+    "https://sg.portal-pokemon.com/tv-film/1/",
+    "https://www.pokemon.com/uk/animation/seasons/1/episode-36-pikachus-goodbye"
+  ],
+  "publish_on": "2026-11-21",
+  "target_time_utc": 17,
+  "timing_mode": "exact_date"
+}

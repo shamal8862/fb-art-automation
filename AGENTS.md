@@ -27,3 +27,7 @@ Keep the recognizable oak desk, studio materials and left-side daylight, but do 
 Read brand/CONTENT_PILLARS.md when planning batches. Include film/comic character studies with sourced facts, verified film releases, cultural epic art and anniversary tributes alongside existing themes. Follow ANY__, WINDOW-..., ON-... folder conventions. The scheduler fully enforces exact dates and window holds automatically when moved to queue/. Never confuse fictional character death with actor death.
 
 Read brand/CAROUSELS.md for multi-image posts. Use 01.png..10.png with matching dimensions/aspect ratio; only final intended slides at package root. Keep alternatives outside package. Single-image and carousel packages both require manual approval under queue/not-approved.
+
+## Hashtags (latest user preference)
+Use exactly five relevant hashtags containing lowercase ASCII letters only (a-z), with no capital letters, digits, underscores or punctuation inside the tag. Applies to new captions.
+

@@ -1,0 +1,28 @@
+{
+  "title": "The Team That Stayed With Us",
+  "type": "evergreen",
+  "post_id": "ANY__character-study__naruto-shippuden-team-seven__b10-03",
+  "content_pillar": "character_study",
+  "character_version": "Naruto Shippuden original Team Seven",
+  "subject_name": [
+    "Naruto Uzumaki",
+    "Sasuke Uchiha",
+    "Sakura Haruno",
+    "Kakashi Hatake"
+  ],
+  "batch": "10",
+  "created_at": "2026-11-04",
+  "verified_at": "2026-11-04",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "format": "single",
+  "alt_text": "Coloured ballpoint-style group portrait of Naruto, Sakura, Sasuke and Kakashi on a photographed sketchbook.",
+  "sources": [
+    "https://naruto-official.com/en/anime/naruto2/list/01_805",
+    "https://naruto-official.com/en/anime/naruto2"
+  ],
+  "fan_art": true,
+  "publish_on": "2026-11-19",
+  "target_time_utc": 17,
+  "timing_mode": "exact_date"
+}
