@@ -34,13 +34,14 @@ class MetaSchedulerClient:
 
     def schedule_photo_post(
         self,
-        image_path: Path,
+        image_path: Any,
         caption: str,
         scheduled_timestamp: int
     ) -> Dict[str, Any]:
         """
-        Schedules a photo post to a Facebook Page.
-        Uses POST /{page-id}/photos with published=false and scheduled_publish_time.
+        Schedules a single photo or multi-photo carousel post to Facebook Page.
+        Accepts Path or List[Path].
+        Uses POST /{page-id}/photos (unpublished) and POST /{page-id}/feed with attached_media.
         """
         now_ts = int(datetime.now(timezone.utc).timestamp())
         min_lead_time = now_ts + 600  # Meta minimum: 10 minutes
@@ -53,70 +54,84 @@ class MetaSchedulerClient:
 
         sched_iso = datetime.fromtimestamp(scheduled_timestamp, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
+        image_paths = image_path if isinstance(image_path, list) else [Path(image_path)]
+        is_carousel = len(image_paths) > 1
+
         # Explicit simulation branch
         if self.dry_run:
             simulated_fbid = f"sim_{int(time.time() * 1000)}"
-            print(f"[Meta Client - SIMULATION] Would schedule '{image_path.name}' to Facebook at {sched_iso}")
+            print(f"[Meta Client - SIMULATION] Would schedule {'carousel with ' + str(len(image_paths)) + ' slides' if is_carousel else image_paths[0].name} to Facebook at {sched_iso}")
             return {
                 "id": simulated_fbid,
                 "post_id": f"{self.page_id or '0000000000'}_{simulated_fbid}",
+                "is_carousel": is_carousel,
                 "dry_run": True
             }
 
-        # Live execution branch (Two-step feed scheduling for Meta Business Suite Planner visibility)
-        print(f"[Meta Client] Step 1/2: Uploading unpublished photo media...")
-        photo_url = f"{self.BASE_URL}/{self.page_id}/photos"
-        mime_type = "image/png" if image_path.suffix.lower() == ".png" else "image/jpeg"
-        
-        with open(image_path, "rb") as img_file:
-            files = {"source": (image_path.name, img_file, mime_type)}
-            photo_resp = requests.post(
-                photo_url,
-                data={"access_token": self.access_token, "published": "false"},
-                files=files,
-                timeout=60
-            )
-
-        if photo_resp.status_code != 200:
-            try:
-                err_data = photo_resp.json()
-            except Exception:
-                err_data = photo_resp.text
-            raise RuntimeError(f"Facebook Photo Upload Error (HTTP {photo_resp.status_code}): {err_data}")
-
-        media_fbid = photo_resp.json().get("id")
-        
-        # Retrieve public CDN image URL from uploaded Facebook media for Instagram reuse
-        cdn_image_url = None
-        try:
-            cdn_resp = requests.get(
-                f"{self.BASE_URL}/{media_fbid}",
-                params={"access_token": self.access_token, "fields": "source"},
-                timeout=15
-            )
-            if cdn_resp.status_code == 200:
-                cdn_image_url = cdn_resp.json().get("source")
-        except Exception as e:
-            logger.warning(f"Could not retrieve Facebook CDN URL for photo {media_fbid}: {e}")
-
-        print(f"[Meta Client] Step 2/2: Scheduling feed post to Meta Business Suite Planner (Slot: {sched_iso})...")
-
+        # Step 1: Upload each image as an unpublished media asset
+        media_fbids = []
+        cdn_image_urls = []
         import json
+
+        for idx, img_p in enumerate(image_paths, 1):
+            prefix = f"[Slide {idx}/{len(image_paths)}] " if is_carousel else ""
+            print(f"[Meta Client] {prefix}Uploading unpublished photo media ({img_p.name})...")
+            photo_url = f"{self.BASE_URL}/{self.page_id}/photos"
+            mime_type = "image/png" if img_p.suffix.lower() == ".png" else "image/jpeg"
+
+            with open(img_p, "rb") as img_file:
+                files = {"source": (img_p.name, img_file, mime_type)}
+                photo_resp = requests.post(
+                    photo_url,
+                    data={"access_token": self.access_token, "published": "false"},
+                    files=files,
+                    timeout=60
+                )
+
+            if photo_resp.status_code != 200:
+                try:
+                    err_data = photo_resp.json()
+                except Exception:
+                    err_data = photo_resp.text
+                raise RuntimeError(f"Facebook Photo Upload Error (HTTP {photo_resp.status_code}): {err_data}")
+
+            m_id = photo_resp.json().get("id")
+            media_fbids.append(m_id)
+
+            # Retrieve high-resolution CDN URL for Instagram bridge
+            try:
+                cdn_resp = requests.get(
+                    f"{self.BASE_URL}/{m_id}",
+                    params={"access_token": self.access_token, "fields": "source"},
+                    timeout=15
+                )
+                if cdn_resp.status_code == 200:
+                    cdn_image_urls.append(cdn_resp.json().get("source"))
+            except Exception as e:
+                logger.warning(f"Could not retrieve Facebook CDN URL for photo {m_id}: {e}")
+
+        # Step 2: Schedule feed post referencing all media FBIDs (native album / carousel)
+        post_type_label = f"carousel post ({len(media_fbids)} slides)" if is_carousel else "photo post"
+        print(f"[Meta Client] Scheduling {post_type_label} to Meta Business Suite Planner (Slot: {sched_iso})...")
+
         feed_url = f"{self.BASE_URL}/{self.page_id}/feed"
         feed_payload = {
             "access_token": self.access_token,
             "message": caption,
             "published": "false",
             "scheduled_publish_time": str(scheduled_timestamp),
-            "attached_media": json.dumps([{"media_fbid": media_fbid}])
+            "attached_media": json.dumps([{"media_fbid": f_id} for f_id in media_fbids])
         }
 
         feed_resp = requests.post(feed_url, data=feed_payload, timeout=30)
         if feed_resp.status_code == 200:
             result = feed_resp.json()
-            result["media_fbid"] = media_fbid
-            result["cdn_image_url"] = cdn_image_url
-            print(f"[Meta Client] SUCCESS! Scheduled Feed Post ID: {result.get('id')}")
+            result["media_fbid"] = media_fbids[0]
+            result["media_fbids"] = media_fbids
+            result["cdn_image_urls"] = cdn_image_urls
+            result["cdn_image_url"] = json.dumps(cdn_image_urls) if is_carousel else (cdn_image_urls[0] if cdn_image_urls else None)
+            result["is_carousel"] = is_carousel
+            print(f"[Meta Client] SUCCESS! Scheduled Feed Post ID: {result.get('id')} ({post_type_label})")
             return result
         else:
             try:
@@ -125,11 +140,30 @@ class MetaSchedulerClient:
                 err_data = feed_resp.text
             raise RuntimeError(f"Facebook Feed Schedule Error (HTTP {feed_resp.status_code}): {err_data}")
 
-    def publish_to_instagram(self, image_url: str, caption: str) -> Dict[str, Any]:
+    def publish_to_instagram(self, image_url: Any, caption: str) -> Dict[str, Any]:
         """
-        Publishes a photo post to the connected Instagram Business account (@doodlore_arts).
-        Uses Meta's two-step container creation & media_publish sequence.
+        Publishes a single photo or multi-slide carousel to Instagram (@doodlore_arts).
+        Automatically detects whether image_url is a single URL or a list of URLs (Carousel).
         """
+        import json
+        urls = []
+        if isinstance(image_url, list):
+            urls = image_url
+        elif isinstance(image_url, str):
+            if image_url.strip().startswith("["):
+                try:
+                    urls = json.loads(image_url)
+                except Exception:
+                    urls = [image_url]
+            else:
+                urls = [image_url]
+
+        # Multi-image carousel dispatch
+        if len(urls) > 1:
+            return self.publish_to_instagram_carousel(urls, caption)
+
+        target_url = urls[0] if urls else image_url
+
         if self.dry_run:
             simulated_ig_id = f"sim_ig_{int(time.time() * 1000)}"
             print(f"[Meta Client - SIMULATION] Would publish to Instagram @doodlore_arts")
@@ -145,7 +179,7 @@ class MetaSchedulerClient:
             container_url,
             data={
                 "access_token": self.access_token,
-                "image_url": image_url,
+                "image_url": target_url,
                 "caption": caption
             },
             timeout=30
@@ -174,6 +208,78 @@ class MetaSchedulerClient:
         ig_result = p_resp.json()
         print(f"[Meta Client - Instagram] SUCCESS! Live Instagram Post ID: {ig_result.get('id')}")
         return ig_result
+
+    def publish_to_instagram_carousel(self, image_urls: List[str], caption: str) -> Dict[str, Any]:
+        """
+        Publishes a multi-image carousel post to Instagram (@doodlore_arts).
+        Uses Meta's n+1 container pipeline: creates is_carousel_item child containers,
+        groups them under a media_type=CAROUSEL parent, then publishes.
+        """
+        if self.dry_run:
+            simulated_id = f"sim_ig_car_{int(time.time() * 1000)}"
+            print(f"[Meta Client - SIMULATION] Would publish Instagram Carousel ({len(image_urls)} slides)")
+            return {"id": simulated_id, "dry_run": True}
+
+        if not self.ig_user_id or not self.access_token:
+            raise ValueError("FATAL: Missing IG_USER_ID or FB_PAGE_ACCESS_TOKEN for Instagram carousel.")
+
+        # Limit to Meta's 10-slide carousel ceiling
+        slide_urls = image_urls[:10]
+        child_container_ids = []
+        print(f"[Meta Client - Instagram Carousel] Step 1/3: Creating {len(slide_urls)} carousel item containers...")
+
+        for idx, url in enumerate(slide_urls, 1):
+            c_resp = requests.post(
+                f"{self.BASE_URL}/{self.ig_user_id}/media",
+                data={
+                    "access_token": self.access_token,
+                    "image_url": url,
+                    "is_carousel_item": "true"
+                },
+                timeout=30
+            )
+            if c_resp.status_code != 200:
+                raise RuntimeError(f"Instagram Carousel slide {idx} creation failed: {c_resp.text}")
+            c_id = c_resp.json().get("id")
+            child_container_ids.append(c_id)
+            print(f"[Meta Client - Instagram Carousel] Slide {idx}/{len(slide_urls)} ready: {c_id}")
+            time.sleep(1)
+
+        # Step 2: Create parent CAROUSEL container
+        print(f"[Meta Client - Instagram Carousel] Step 2/3: Creating parent container with {len(child_container_ids)} children...")
+        parent_resp = requests.post(
+            f"{self.BASE_URL}/{self.ig_user_id}/media",
+            data={
+                "access_token": self.access_token,
+                "media_type": "CAROUSEL",
+                "children": ",".join(child_container_ids),
+                "caption": caption
+            },
+            timeout=30
+        )
+        if parent_resp.status_code != 200:
+            raise RuntimeError(f"Instagram Carousel parent container creation failed: {parent_resp.text}")
+
+        parent_id = parent_resp.json().get("id")
+        print(f"[Meta Client - Instagram Carousel] Parent container created: {parent_id}. Waiting for processing...")
+        time.sleep(3)
+
+        # Step 3: Publish the carousel parent
+        print(f"[Meta Client - Instagram Carousel] Step 3/3: Publishing carousel container {parent_id}...")
+        pub_resp = requests.post(
+            f"{self.BASE_URL}/{self.ig_user_id}/media_publish",
+            data={
+                "access_token": self.access_token,
+                "creation_id": parent_id
+            },
+            timeout=30
+        )
+        if pub_resp.status_code != 200:
+            raise RuntimeError(f"Instagram Carousel media_publish failed: {pub_resp.text}")
+
+        car_result = pub_resp.json()
+        print(f"[Meta Client - Instagram Carousel] SUCCESS! Live Instagram Carousel ID: {car_result.get('id')}")
+        return car_result
 
     def publish_facebook_story(self, image_path: Path) -> Dict[str, Any]:
         """

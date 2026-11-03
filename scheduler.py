@@ -159,7 +159,8 @@ def run_scheduler_cycle():
                 slot_timestamp = CalendarPlanner.get_next_slot(pkg.category)
                 slot_iso = datetime.fromtimestamp(slot_timestamp, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
-                print(f"\n---> Processing: '{pkg.title}'")
+                carousel_tag = f" [Carousel: {len(pkg.image_paths)} slides]" if getattr(pkg, "is_carousel", False) else ""
+                print(f"\n---> Processing: '{pkg.title}'{carousel_tag}")
                 print(f"     Target Slot: {slot_iso} ({pkg.category})")
 
                 # Phase 1: Record pending row before calling Meta
@@ -173,9 +174,9 @@ def run_scheduler_cycle():
                     is_simulation=DRY_RUN
                 )
 
-                # Phase 2: Transmit to Facebook
+                # Phase 2: Transmit to Facebook (supports single photo or multi-photo carousel)
                 meta_res = meta_client.schedule_photo_post(
-                    image_path=pkg.image_path,
+                    image_path=pkg.image_paths if getattr(pkg, "is_carousel", False) else pkg.image_path,
                     caption=pkg.caption,
                     scheduled_timestamp=slot_timestamp
                 )

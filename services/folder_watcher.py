@@ -17,7 +17,7 @@ class PostPackage:
         post_dir: str,
         category: str,
         package_path: Path,
-        image_path: Path,
+        image_paths: List[Path],
         caption: str,
         title: str,
         metadata: Dict[str, Any]
@@ -25,7 +25,9 @@ class PostPackage:
         self.post_dir = post_dir
         self.category = category
         self.package_path = package_path
-        self.image_path = image_path
+        self.image_paths = image_paths if isinstance(image_paths, list) else [image_paths]
+        self.image_path = self.image_paths[0]
+        self.is_carousel = len(self.image_paths) > 1
         self.caption = caption
         self.title = title
         self.metadata = metadata
@@ -67,27 +69,28 @@ class FolderWatcher:
         # Check for optional ready.flag or .ready file
         ready_flag = (dir_path / "ready.flag").exists() or (dir_path / ".ready").exists()
 
-        # Find image file
-        image_file = None
-        for file in dir_path.iterdir():
-            if file.suffix.lower() in cls.SUPPORTED_EXTS and not file.name.startswith("."):
-                image_file = file
-                break
+        # Find all valid image files in alphanumeric order (e.g. 01.png, 02.png or image1.png, image2.png)
+        image_files = sorted([
+            file for file in dir_path.iterdir()
+            if file.suffix.lower() in cls.SUPPORTED_EXTS and not file.name.startswith(".")
+        ], key=lambda x: x.name.lower())
 
-        if not image_file or image_file.stat().st_size < 500:
+        if not image_files or image_files[0].stat().st_size < 500:
             return None  # Missing or empty file
 
-        # If no explicit ready flag, verify the file isn't actively being written (age > 2 seconds)
+        # If no explicit ready flag, verify files aren't actively being written (age > 2 seconds)
         if not ready_flag:
-            file_age = time.time() - image_file.stat().st_mtime
-            if file_age < 2.0:
-                print(f"[Watcher] Skipping '{post_dir}': file actively being written (age={file_age:.1f}s)")
-                return None
+            for img_f in image_files:
+                file_age = time.time() - img_f.stat().st_mtime
+                if file_age < 2.0:
+                    print(f"[Watcher] Skipping '{post_dir}': file actively being written (age={file_age:.1f}s)")
+                    return None
 
         # Verify image integrity via PIL
         try:
-            with Image.open(image_file) as img:
-                img.verify()
+            for img_f in image_files:
+                with Image.open(img_f) as img:
+                    img.verify()
         except Exception as e:
             print(f"[Watcher] Image corruption detected in '{post_dir}': {e}")
             return None
@@ -124,7 +127,7 @@ class FolderWatcher:
             post_dir=post_dir,
             category=metadata.get("type", category),
             package_path=dir_path,
-            image_path=image_file,
+            image_paths=image_files,
             caption=caption,
             title=title,
             metadata=metadata
