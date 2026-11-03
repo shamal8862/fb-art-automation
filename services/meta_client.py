@@ -73,8 +73,9 @@ class MetaSchedulerClient:
 
         print(f"[Meta Client] Transmitting live photo post to Facebook (Slot: {sched_iso})...")
 
+        mime_type = "image/png" if image_path.suffix.lower() == ".png" else "image/jpeg"
         with open(image_path, "rb") as img_file:
-            files = {"source": (image_path.name, img_file, "image/jpeg")}
+            files = {"source": (image_path.name, img_file, mime_type)}
             response = requests.post(url, data=payload, files=files, timeout=60)
 
         if response.status_code == 200:
