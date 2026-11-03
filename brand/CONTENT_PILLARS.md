@@ -52,3 +52,8 @@ As of November 3, 2026: The scheduler fully supports folder prefixes and metadat
 - `ANY__`: Follows standard FIFO rotation queue.
 - Metadata keys `publish_on`, `publish_not_before`, `publish_not_after`, `target_time_utc`, and `strict_date` are fully parsed and honored.
 Once approved by moving from `queue/not-approved/` into `queue/`, the scheduler automatically assigns and guarantees the requested date and window!
+
+## Lifestyle art and coloured pen work
+Include lifestyle as a content pillar: practical, optional everyday ideas paired with original expressive drawings. Caption offers a useful small action, context and a natural optional question; exactly five relevant hashtags. Avoid medical/therapy claims, fabricated evidence, guaranteed engagement and guilt-based sharing prompts. Source factual health/safety claims when relevant; do not turn ordinary organisational suggestions into clinical advice.
+Rotate genuine coloured-pen linework alongside graphite and single-colour ink. Specify visible overlapping ink strokes, loops, variable pressure and selective hatching in 2-4 coordinated colours; do not substitute pastel shading or smooth digital fills when coloured pen is requested. Some more energetic scribble drawings can coexist with sparse sketches; avoid copying reference compositions, signatures or watermarks. Keep realistic paper-photo presentation, varied framing, small Doodlore mark and no artist hands by default.
+
