@@ -1,0 +1,14 @@
+[Tue 11/03/2026 16:18:40.73] Running Facebook Art Scheduler startup check... 
+=================================================================
+ The Inked Chronicle — Facebook Art Scheduling Engine
+ Mode: DRY RUN (Simulation) | Target Page ID: Not Set
+=================================================================
+[1/4] Scanning queue folders for incoming artwork packages...
+[Status] No new artwork packages waiting in queue.
+
+-----------------------------------------------------------------
+ ACTIVE FUTURE SCHEDULE CALENDAR (2 posts currently queued)
+-----------------------------------------------------------------
+ • [TIMELY   ] 2026-11-03T13:00:00+00:00 (in 2.2h) | The Gentle Giant
+ • [EVERGREEN] 2026-11-03T17:00:00+00:00 (in 6.2h) | The Hands That Held Us
+-----------------------------------------------------------------
