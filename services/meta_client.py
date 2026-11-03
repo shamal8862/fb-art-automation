@@ -175,6 +175,84 @@ class MetaSchedulerClient:
         print(f"[Meta Client - Instagram] SUCCESS! Live Instagram Post ID: {ig_result.get('id')}")
         return ig_result
 
+    def publish_facebook_story(self, image_path: Path) -> Dict[str, Any]:
+        """
+        Publishes an image as an active 24-hour Story to the Facebook Page.
+        Uses POST /{page-id}/photo_stories with an unpublished photo.
+        """
+        if self.dry_run:
+            print(f"[Meta Client - SIMULATION] Would publish Facebook Page Story: {image_path.name}")
+            return {"success": True, "dry_run": True}
+
+        photo_url = f"{self.BASE_URL}/{self.page_id}/photos"
+        mime_type = "image/png" if image_path.suffix.lower() == ".png" else "image/jpeg"
+        with open(image_path, "rb") as img_file:
+            files = {"source": (image_path.name, img_file, mime_type)}
+            r_up = requests.post(
+                photo_url,
+                data={"access_token": self.access_token, "published": "false"},
+                files=files,
+                timeout=60
+            )
+
+        if r_up.status_code != 200:
+            logger.warning(f"Failed to upload photo for Facebook Story: {r_up.text}")
+            return {"error": r_up.text}
+
+        photo_id = r_up.json().get("id")
+        story_url = f"{self.BASE_URL}/{self.page_id}/photo_stories"
+        r_story = requests.post(
+            story_url,
+            data={"access_token": self.access_token, "photo_id": photo_id},
+            timeout=30
+        )
+        if r_story.status_code == 200:
+            res = r_story.json()
+            print(f"[Meta Client - Facebook Story] SUCCESS! Story published: {res.get('post_id')}")
+            return res
+        else:
+            logger.warning(f"Facebook Story publish failed: {r_story.text}")
+            return {"error": r_story.text}
+
+    def publish_instagram_story(self, image_url: str) -> Dict[str, Any]:
+        """
+        Publishes an image as an active 24-hour Story to the connected Instagram account.
+        Uses POST /{ig-user-id}/media with media_type=STORIES.
+        """
+        if self.dry_run:
+            print(f"[Meta Client - SIMULATION] Would publish Instagram Story")
+            return {"id": "sim_ig_story", "dry_run": True}
+
+        if not self.ig_user_id or not self.access_token:
+            return {"error": "Missing IG_USER_ID or access token"}
+
+        container_url = f"{self.BASE_URL}/{self.ig_user_id}/media"
+        c_resp = requests.post(
+            container_url,
+            data={"access_token": self.access_token, "image_url": image_url, "media_type": "STORIES"},
+            timeout=30
+        )
+        if c_resp.status_code != 200:
+            logger.warning(f"Instagram Story container error: {c_resp.text}")
+            return {"error": c_resp.text}
+
+        container_id = c_resp.json().get("id")
+        time.sleep(2)
+
+        pub_url = f"{self.BASE_URL}/{self.ig_user_id}/media_publish"
+        p_resp = requests.post(
+            pub_url,
+            data={"access_token": self.access_token, "creation_id": container_id},
+            timeout=30
+        )
+        if p_resp.status_code == 200:
+            res = p_resp.json()
+            print(f"[Meta Client - Instagram Story] SUCCESS! Story published: {res.get('id')}")
+            return res
+        else:
+            logger.warning(f"Instagram Story publish error: {p_resp.text}")
+            return {"error": p_resp.text}
+
     def schedule_dual_post(
         self,
         image_path: Path,

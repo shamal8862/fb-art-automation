@@ -72,9 +72,25 @@ def publish_due_instagram_posts(meta_client: MetaSchedulerClient):
 
     for p in due_posts:
         try:
-            print(f"[Instagram Auto-Publisher] Slot arrived for '{p['title']}'. Publishing to @doodlore_arts...")
+            print(f"[Auto-Publisher] Slot arrived for '{p['title']}'. Publishing to @doodlore_arts & Stories...")
+            # 1. Instagram Feed
             res = meta_client.publish_to_instagram(p["cdn_image_url"], p["caption"])
             ig_id = res.get("id")
+            
+            # 2. Instagram Story
+            try:
+                meta_client.publish_instagram_story(p["cdn_image_url"])
+            except Exception as e_ig_story:
+                print(f"[Auto-Publisher] Instagram Story notice: {e_ig_story}")
+
+            # 3. Facebook Page Story
+            try:
+                img_path = Path(p["image_path"])
+                if img_path.exists():
+                    meta_client.publish_facebook_story(img_path)
+            except Exception as e_fb_story:
+                print(f"[Auto-Publisher] Facebook Story notice: {e_fb_story}")
+
             with get_connection() as conn:
                 conn.cursor().execute("""
                     UPDATE scheduled_posts
@@ -82,9 +98,9 @@ def publish_due_instagram_posts(meta_client: MetaSchedulerClient):
                     WHERE id = ?
                 """, (ig_id, p["id"]))
                 conn.commit()
-            print(f"[Instagram Auto-Publisher] [OK] Published '{p['title']}' to Instagram (ID: {ig_id})")
+            print(f"[Auto-Publisher] [OK] Complete dual-post & stories published for '{p['title']}' (IG: {ig_id})")
         except Exception as e:
-            print(f"[Instagram Auto-Publisher] [ERROR] Could not publish '{p['title']}' to Instagram: {e}")
+            print(f"[Auto-Publisher] [ERROR] Could not publish '{p['title']}': {e}")
 
 def reconcile_pending_posts(meta_client: MetaSchedulerClient):
     """Reconciles interrupted uploads by checking Meta's live scheduled queue."""

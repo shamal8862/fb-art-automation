@@ -50,3 +50,6 @@ Use fuller captions where context adds meaning: roughly 60-100 words for emotion
 
 ## Caption disclosure preference (latest)
 The user will manually apply the platform AI label. Do not include AI-created disclosure lines or AI hashtags in public caption.txt files. Write natural, thoughtful captions with five relevant hashtags, without claiming physical handmade authorship, real eyewitness experience, or a real artist's biography. Retain factual clarification that a scene is an artistic interpretation when needed. Internal metadata must retain ai_generated=true. This supersedes earlier requirements for AI disclosure inside captions.
+
+## Natural variation in photo staging (latest)
+Keep the recognizable oak desk, studio materials and left-side daylight, but do not repeat a frozen composition. Vary camera angle, camera distance, paper rotation, subject scale and crop across a batch. Alternate close details, overhead and oblique seated views. The sage mug is optional: often omit it, change its handle direction, or move it naturally around the desk. Pens and erasers may also move or be absent. This overrides older rules fixing movable desk props in identical positions. Keep the window/room geometry and believable shadows consistent. No artist hands by default. Review adjacent images together for repetitive framing.

@@ -35,3 +35,6 @@ Day: soft overcast light enters from LEFT, shadows fall gently right. Neutral wh
 4. Wide: room/window context; suited to occasional studio-story posts rather than every artwork.
 
 Prefer portrait 4:5 for artwork posts. A reference board is a multi-panel guide, not a ready-to-publish drawing. Avoid generating every post as a collage.
+
+## Natural variation in photo staging (latest)
+Keep the recognizable oak desk, studio materials and left-side daylight, but do not repeat a frozen composition. Vary camera angle, camera distance, paper rotation, subject scale and crop across a batch. Alternate close details, overhead and oblique seated views. The sage mug is optional: often omit it, change its handle direction, or move it naturally around the desk. Pens and erasers may also move or be absent. This overrides older rules fixing movable desk props in identical positions. Keep the window/room geometry and believable shadows consistent. No artist hands by default. Review adjacent images together for repetitive framing.
