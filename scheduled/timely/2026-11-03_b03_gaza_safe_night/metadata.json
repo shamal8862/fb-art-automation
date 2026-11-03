@@ -1,0 +1,16 @@
+{
+  "post_id": "doodlore-2026-11-03_b03_gaza_safe_night",
+  "title": "A Safe Night",
+  "type": "timely",
+  "batch": "2026-11-03-b03",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "alt_text": "A Palestinian parent sitting close with two children under a shared blanket at entrance to a simple temporary shelter, parent gently holding younger child leaning against them. Non-graphic, no visible wounds, weapons, explosions, soldiers or corpses. Few shelter contour lines, tiny pair of shoes outside. Compassionate quiet human intimacy, no dramatic weeping. Symbolic scene about Gaza civilian shelter, not real identified people.",
+  "sources": [
+    "https://www.unicef.org/appeals/state-of-palestine"
+  ],
+  "verified_at": "2026-11-03",
+  "expires_at": "2026-11-10",
+  "context": "Ongoing humanitarian theme; September 2026 UNICEF appeal. Not a newly verified last-24-hours incident. Imagined people.",
+  "generation_method": "built-in image_gen"
+}

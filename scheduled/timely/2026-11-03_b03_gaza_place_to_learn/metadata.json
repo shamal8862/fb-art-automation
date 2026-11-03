@@ -1,0 +1,16 @@
+{
+  "post_id": "doodlore-2026-11-03_b03_gaza_place_to_learn",
+  "title": "A Place to Learn",
+  "type": "timely",
+  "batch": "2026-11-03-b03",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "alt_text": "Two Palestinian children seated beside a simple temporary shelter, sharing one open school notebook and a short pencil. Dignified ordinary children, modest everyday clothing, no stereotypes, no injuries, no weapons, faces lightly suggested. Tiny school bag, sparse shelter contours and blank surroundings. Symbolic imagined scene about Gaza children's education, not identified real people.",
+  "sources": [
+    "https://www.unicef.org/appeals/state-of-palestine"
+  ],
+  "verified_at": "2026-11-03",
+  "expires_at": "2026-11-10",
+  "context": "Ongoing humanitarian theme; September 2026 UNICEF appeal. Not a newly verified last-24-hours incident. Imagined people.",
+  "generation_method": "built-in image_gen"
+}

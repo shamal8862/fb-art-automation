@@ -1,0 +1,16 @@
+{
+  "post_id": "doodlore-2026-11-03_b03_syria_after_water",
+  "title": "After the Water",
+  "type": "timely",
+  "batch": "2026-11-03-b03",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "alt_text": "Symbolic simple still life of muddy boots at an open doorstep, a bucket and broom resting nearby, one small plant in bent pot still upright. Represents recovery after Syrian flash floods, no drowned people, dangerous water crossings, dramatic destruction or fabricated identifiable site. Economical pencil marks, selective mud indications only.",
+  "sources": [
+    "https://emissa.org/emergency-updates/"
+  ],
+  "verified_at": "2026-11-03",
+  "expires_at": "2026-11-07",
+  "context": "November 2 source; symbolic scene.",
+  "generation_method": "built-in image_gen"
+}

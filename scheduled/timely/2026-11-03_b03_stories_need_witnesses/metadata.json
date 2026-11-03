@@ -1,0 +1,16 @@
+{
+  "post_id": "doodlore-2026-11-03_b03_stories_need_witnesses",
+  "title": "Stories Need Witnesses",
+  "type": "timely",
+  "batch": "2026-11-03-b03",
+  "review_status": "pending_manual_approval",
+  "ai_generated": true,
+  "alt_text": "A simple worn reporter's notebook lying open with a pencil, beside a small camera with loose strap on drawn tabletop. Notebook has only faint abstract lines no readable words, no logos or blood. Symbolic quiet tribute to journalist safety, no suggestion these belongings are from an actual victim.",
+  "sources": [
+    "https://www.coe.int/en/web/freedom-expression/-/when-journalists-are-silenced-democracy-loses-its-voice"
+  ],
+  "verified_at": "2026-11-03",
+  "expires_at": "2026-11-07",
+  "context": "November 2 source; symbolic scene.",
+  "generation_method": "built-in image_gen"
+}
