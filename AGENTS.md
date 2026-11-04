@@ -31,3 +31,10 @@ Read brand/CAROUSELS.md for multi-image posts. Use 01.png..10.png with matching 
 ## Hashtags (latest user preference)
 Use exactly five relevant hashtags containing lowercase ASCII letters only (a-z), with no capital letters, digits, underscores or punctuation inside the tag. Applies to new captions.
 
+
+## Story captions (latest user preference)
+Prefer fuller captions with a concrete hook, connected relatable story and natural topic search keywords. Around 130-180 words where useful; avoid filler, keyword stuffing, invented testimonials or guaranteed reach. Questions optional; exactly five lowercase-letter hashtags. Clarify imagined stories where factual confusion is possible.
+
+## Time of day and atmospheric photo variation (latest user preference)
+Vary the time and weather of the photographed studio scene across future generations, rather than using bright daytime light throughout. Rotate believable soft morning light, cloudy/rainy midday, muted late afternoon, blue-hour dusk and occasional warm evening lamp light. Coordinate exposure, paper white balance, colour temperature, shadow direction and visible window brightness with the chosen conditions. Keep artwork colours legible and ink/paper materials believable; avoid heavy filters, theatrical glow, excessive darkness or orange casts. The physical window remains LEFT and task lamp BACK RIGHT. In daytime use left window as principal source; after dark the window is dark and back-right lamp can be the principal warm source, with shadows consistent with it. Movable props may vary or be absent; no artist hands by default. Spread lighting variants through a batch instead of repeating one setup. Save the lighting/time/weather choice in the prompt and metadata. An evening setup should first be treated as a reviewable lighting exploration before establishing it as a repeated reference. These instructions supersede default prompts that always prescribe bright left daylight. Existing artworks remain unchanged unless requested.
+
