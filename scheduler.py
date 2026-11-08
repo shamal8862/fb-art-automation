@@ -76,20 +76,49 @@ def publish_due_instagram_posts(meta_client: MetaSchedulerClient):
             print(f"[Auto-Publisher] Slot arrived for '{p['title']}'. Publishing to @doodlore_arts & Stories...")
             # 1. Instagram Feed (enforce all simple lowercase hashtags)
             clean_caption = re.sub(r'#(\w+)', lambda m: f"#{m.group(1).lower()}", p["caption"])
-            res = meta_client.publish_to_instagram(p["cdn_image_url"], clean_caption)
+            cdn_url = p["cdn_image_url"]
+
+            try:
+                res = meta_client.publish_to_instagram(cdn_url, clean_caption)
+            except Exception as e_ig:
+                raw_path = p.get("image_path")
+                if raw_path:
+                    print(f"[Auto-Publisher] Instagram publish notice ({e_ig}). Re-uploading to refresh Meta CDN URL...")
+                    cdn_url = meta_client.get_fresh_cdn_url(raw_path)
+                    res = meta_client.publish_to_instagram(cdn_url, clean_caption)
+                    with get_connection() as conn:
+                        conn.cursor().execute("UPDATE scheduled_posts SET cdn_image_url = ? WHERE id = ?", (cdn_url, p["id"]))
+                        conn.commit()
+                else:
+                    raise e_ig
+
             ig_id = res.get("id")
             
             # 2. Instagram Story
             try:
-                meta_client.publish_instagram_story(p["cdn_image_url"])
+                story_url = cdn_url
+                if isinstance(cdn_url, str) and cdn_url.strip().startswith("["):
+                    try:
+                        import json
+                        story_url = json.loads(cdn_url)[0]
+                    except Exception:
+                        story_url = cdn_url
+                meta_client.publish_instagram_story(story_url)
             except Exception as e_ig_story:
                 print(f"[Auto-Publisher] Instagram Story notice: {e_ig_story}")
 
             # 3. Facebook Page Story
             try:
-                img_path = Path(p["image_path"])
-                if img_path.exists():
-                    meta_client.publish_facebook_story(img_path)
+                raw_path = p.get("image_path")
+                if raw_path:
+                    if isinstance(raw_path, str) and raw_path.strip().startswith("["):
+                        import json
+                        first_path = json.loads(raw_path)[0]
+                    else:
+                        first_path = raw_path
+                    img_path = Path(first_path)
+                    if img_path.exists():
+                        meta_client.publish_facebook_story(img_path)
             except Exception as e_fb_story:
                 print(f"[Auto-Publisher] Facebook Story notice: {e_fb_story}")
 

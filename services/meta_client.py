@@ -359,6 +359,62 @@ class MetaSchedulerClient:
             logger.warning(f"Instagram Story publish error: {p_resp.text}")
             return {"error": p_resp.text}
 
+    def get_fresh_cdn_url(self, image_path: Any) -> Any:
+        """
+        Uploads an image (or list of images) as an unpublished photo to Facebook
+        and retrieves fresh Meta CDN source URLs that won't expire immediately.
+        """
+        if self.dry_run:
+            return "https://example.com/simulated_fresh.jpg"
+
+        import json
+        paths = []
+        if isinstance(image_path, list):
+            paths = [Path(x) for x in image_path]
+        elif isinstance(image_path, str):
+            if image_path.strip().startswith("["):
+                try:
+                    paths = [Path(x) for x in json.loads(image_path)]
+                except Exception:
+                    paths = [Path(image_path)]
+            else:
+                paths = [Path(image_path)]
+        elif isinstance(image_path, Path):
+            paths = [image_path]
+
+        fresh_urls = []
+        for p in paths:
+            if not p.exists():
+                raise FileNotFoundError(f"Local image not found: {p}")
+            photo_url = f"{self.BASE_URL}/{self.page_id}/photos"
+            mime_type = "image/png" if p.suffix.lower() == ".png" else "image/jpeg"
+            with open(p, "rb") as img_file:
+                files = {"source": (p.name, img_file, mime_type)}
+                r_up = requests.post(
+                    photo_url,
+                    data={"access_token": self.access_token, "published": "false"},
+                    files=files,
+                    timeout=60
+                )
+            if r_up.status_code != 200:
+                raise RuntimeError(f"Failed to upload photo for fresh CDN URL ({p.name}): {r_up.text}")
+            photo_id = r_up.json().get("id")
+            cdn_resp = requests.get(
+                f"{self.BASE_URL}/{photo_id}",
+                params={"access_token": self.access_token, "fields": "source"},
+                timeout=15
+            )
+            if cdn_resp.status_code != 200:
+                raise RuntimeError(f"Failed to get source URL for photo {photo_id}: {cdn_resp.text}")
+            src = cdn_resp.json().get("source")
+            if not src:
+                raise RuntimeError(f"Source URL missing in photo {photo_id} response: {cdn_resp.text}")
+            fresh_urls.append(src)
+
+        if len(fresh_urls) == 1:
+            return fresh_urls[0]
+        return json.dumps(fresh_urls)
+
     def schedule_dual_post(
         self,
         image_path: Path,
