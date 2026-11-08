@@ -6,6 +6,7 @@ import sys
 import time
 import argparse
 import atexit
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -73,8 +74,9 @@ def publish_due_instagram_posts(meta_client: MetaSchedulerClient):
     for p in due_posts:
         try:
             print(f"[Auto-Publisher] Slot arrived for '{p['title']}'. Publishing to @doodlore_arts & Stories...")
-            # 1. Instagram Feed
-            res = meta_client.publish_to_instagram(p["cdn_image_url"], p["caption"])
+            # 1. Instagram Feed (enforce all simple lowercase hashtags)
+            clean_caption = re.sub(r'#(\w+)', lambda m: f"#{m.group(1).lower()}", p["caption"])
+            res = meta_client.publish_to_instagram(p["cdn_image_url"], clean_caption)
             ig_id = res.get("id")
             
             # 2. Instagram Story
