@@ -5,6 +5,11 @@ on:
   # GitHub's own scheduler drops most cron runs, so it is only a sparse backup.
   # run_reel.py refuses to post if the last Reel was less than MIN_GAP_HOURS ago.
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Post now even if the last Reel was under 4 hours ago (manual tests)'
+        type: boolean
+        default: false
   schedule:
     - cron: '20 */12 * * *'
 
@@ -45,7 +50,7 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}  # cross-post to Instagram @doodlore_arts (skipped if empty)
           DRY_RUN: 'false'
           MIN_GAP_HOURS: '4'
-        run: python -u reels/run_reel.py
+        run: python -u reels/run_reel.py ${{ inputs.force && '--force' || '' }}
 
       - name: Commit Reel History
         if: ${{ !cancelled() }}
