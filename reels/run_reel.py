@@ -33,6 +33,12 @@ def main():
     args = ap.parse_args()
     dry = args.dry_run or os.getenv("DRY_RUN", "true").lower() in ("true", "1", "yes")
 
+    if not dry and os.getenv("IG_USER_ID") and os.getenv("FB_PAGE_ACCESS_TOKEN"):
+        try:
+            engine.instagram_catch_up(os.environ["FB_PAGE_ACCESS_TOKEN"], os.environ["IG_USER_ID"])
+        except Exception as e:
+            print(f"[Instagram catch-up] skipped: {e}")
+
     gap_hours = float(os.getenv("MIN_GAP_HOURS", "3"))
     posted = [h for h in engine.load_history() if h.get("status") == "posted"]
     if posted and not args.force and not dry:

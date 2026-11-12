@@ -515,8 +515,9 @@ def render(scenes: list, out_path: Path) -> Path:
     (WORK / "v.txt").write_text("".join(f"file '{c.as_posix()}'\n" for c in clips), encoding="utf-8")
     (WORK / "a.txt").write_text("".join(f"file '{a.as_posix()}'\n" for a in audios), encoding="utf-8")
     ff("-f", "concat", "-safe", "0", "-i", str(WORK / "a.txt"), "-c", "copy", str(WORK / "narration.wav"))
+    # Audio as Instagram expects (AAC, 48 kHz, stereo, 128k); mono 44.1 kHz was rejected with error 2207076
     ff("-f", "concat", "-safe", "0", "-i", str(WORK / "v.txt"), "-i", str(WORK / "narration.wav"), "-c:v", "copy",
-       "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(out_path))
+       "-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "128k", "-shortest", "-movflags", "+faststart", str(out_path))
     return out_path
 
 
@@ -559,31 +560,18 @@ def publish_reel(video: Path, description: str, page_id: str, token: str, api: s
     return {"success": True, "video_id": vid}
 
 
-def publish_ig_reel(video: Path, caption: str, ig_user_id: str, token: str, api: str = "v22.0",
-                    publish: bool = True) -> dict:
-    """Instagram Reels via resumable upload: container -> binary upload -> wait FINISHED -> media_publish."""
-    g = f"https://graph.facebook.com/{api}"
-    c = requests.post(f"{g}/{ig_user_id}/media", data={
-        "media_type": "REELS", "upload_type": "resumable", "caption": caption[:2200],
-        "share_to_feed": "true", "access_token": token}, timeout=60).json()
-    cid = c.get("id")
-    if not cid:
-        return {"success": False, "error": c}
-    # rupload only accepts some API versions for this app (v21.0 verified; the returned uri / newer ones can fail
-    # with ProcessingFailedError), so try a short list until one succeeds.
-    payload = Path(video).read_bytes()
-    urls = [f"https://rupload.facebook.com/ig-api-upload/v21.0/{cid}", c.get("uri"),
-            f"https://rupload.facebook.com/ig-api-upload/v20.0/{cid}"]
-    up = {}
-    for upload_url in [u for u in urls if u]:
-        up = requests.post(upload_url, headers={"Authorization": f"OAuth {token}", "offset": "0",
-                                                "file_size": str(len(payload)),
-                                                "Content-Type": "application/octet-stream"},
-                           data=payload, timeout=300).json()
-        if up.get("success"):
-            break
-    if not up.get("success"):
-        return {"success": False, "error": up}
+def fb_video_source(video_id: str, token: str, api: str = "v22.0") -> str:
+    """Waits for Facebook to finish processing the Reel and returns its CDN mp4 URL (used as Instagram video_url)."""
+    for _ in range(24):  # up to ~4 minutes
+        r = requests.get(f"https://graph.facebook.com/{api}/{video_id}", params={
+            "fields": "source,status", "access_token": token}, timeout=30).json()
+        if r.get("source"):
+            return r["source"]
+        time.sleep(10)
+    return ""
+
+
+def _ig_wait_and_publish(g: str, cid: str, ig_user_id: str, token: str, publish: bool) -> dict:
     status = {}
     for _ in range(40):  # up to ~6.5 minutes of processing
         time.sleep(10)
@@ -598,6 +586,88 @@ def publish_ig_reel(video: Path, caption: str, ig_user_id: str, token: str, api:
     if not pub.get("id"):
         return {"success": False, "error": pub, "container": cid}
     return {"success": True, "media_id": pub["id"]}
+
+
+def publish_ig_reel(video: Path, caption: str, ig_user_id: str, token: str, api: str = "v22.0",
+                    publish: bool = True, fb_video_id: str = "") -> dict:
+    """Instagram Reel. Method 1: resumable binary upload. Method 2 (fallback): hand Instagram the CDN URL of the
+    already-published Facebook Reel (same bridge the art scheduler uses for images)."""
+    g = f"https://graph.facebook.com/{api}"
+    first = _publish_ig_resumable(g, video, caption, ig_user_id, token, publish)
+    if first.get("success") or not fb_video_id:
+        return first
+    print(f"[Instagram] Direct upload failed ({str(first.get('error'))[:120]}); using the Facebook video URL instead")
+    src = fb_video_source(fb_video_id, token, api)
+    if not src:
+        return {"success": False, "error": "Facebook video source URL not available"}
+    c = requests.post(f"{g}/{ig_user_id}/media", data={
+        "media_type": "REELS", "video_url": src, "caption": caption[:2200],
+        "share_to_feed": "true", "access_token": token}, timeout=60).json()
+    if not c.get("id"):
+        return {"success": False, "error": c}
+    return _ig_wait_and_publish(g, c["id"], ig_user_id, token, publish)
+
+
+def _publish_ig_resumable(g: str, video: Path, caption: str, ig_user_id: str, token: str, publish: bool) -> dict:
+    c = requests.post(f"{g}/{ig_user_id}/media", data={
+        "media_type": "REELS", "upload_type": "resumable", "caption": caption[:2200],
+        "share_to_feed": "true", "access_token": token}, timeout=60).json()
+    cid = c.get("id")
+    if not cid:
+        return {"success": False, "error": c}
+    time.sleep(5)  # give the new container a moment before uploading
+    # rupload only accepts some API versions for this app (v21.0 verified; the returned uri / newer ones can fail
+    # with ProcessingFailedError), so try a short list until one succeeds.
+    payload = Path(video).read_bytes()
+    urls = [f"https://rupload.facebook.com/ig-api-upload/v21.0/{cid}", c.get("uri"),
+            f"https://rupload.facebook.com/ig-api-upload/v20.0/{cid}"]
+    up = {}
+    for upload_url in [u for u in urls if u]:
+        up = requests.post(upload_url, headers={"Authorization": f"OAuth {token}", "offset": "0",
+                                                "file_size": str(len(payload)),
+                                                "Content-Type": "application/octet-stream"},
+                           data=payload, timeout=300).json()
+        if up.get("success"):
+            break
+        time.sleep(5)
+    if not up.get("success"):
+        return {"success": False, "error": up}
+    return _ig_wait_and_publish(g, cid, ig_user_id, token, publish)
+
+
+def instagram_catch_up(token: str, ig_user_id: str, hours: int = 24, max_attempts: int = 3):
+    """Re-tries Instagram for recent Facebook Reels that did not reach Instagram (Meta has transient IG outages).
+    Downloads the Facebook copy, re-encodes it to Instagram's spec and uploads it."""
+    history = load_history()
+    now = datetime.now(timezone.utc)
+    changed = False
+    for h in history:
+        if h.get("status") != "posted" or h.get("ig_media_id") or not h.get("video_id"):
+            continue
+        if (now - datetime.fromisoformat(h["date"])).total_seconds() > hours * 3600 or h.get("ig_attempts", 0) >= max_attempts:
+            continue
+        h["ig_attempts"] = h.get("ig_attempts", 0) + 1
+        changed = True
+        try:
+            g = "https://graph.facebook.com/v22.0"
+            info = requests.get(f"{g}/{h['video_id']}", params={"fields": "source,description", "access_token": token}, timeout=30).json()
+            if not info.get("source"):
+                continue
+            WORK.mkdir(exist_ok=True)
+            raw, fixed = WORK / "ig_catchup_raw.mp4", WORK / "ig_catchup.mp4"
+            raw.write_bytes(requests.get(info["source"], timeout=180).content)
+            ff("-i", str(raw), "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", "30", "-preset", "veryfast",
+               "-crf", "21", "-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "128k", "-movflags", "+faststart", str(fixed))
+            res = publish_ig_reel(fixed, info.get("description", ""), ig_user_id, token)
+            if res.get("success"):
+                h["ig_media_id"] = res["media_id"]
+                print(f"[Instagram catch-up] Posted '{h['title']}': {res['media_id']}")
+            else:
+                print(f"[Instagram catch-up] '{h['title']}' still failing: {str(res.get('error'))[:160]}")
+        except Exception as e:
+            print(f"[Instagram catch-up] '{h['title']}' error: {e}")
+    if changed:
+        save_history(history)
 
 
 # =============================================================================== one run
@@ -656,7 +726,8 @@ def make_one(dry_run: bool) -> dict:
             ig_id = os.getenv("IG_USER_ID", "").strip()
             if ig_id:
                 try:
-                    ig = publish_ig_reel(video, caption, ig_id, os.environ["FB_PAGE_ACCESS_TOKEN"])
+                    ig = publish_ig_reel(video, caption, ig_id, os.environ["FB_PAGE_ACCESS_TOKEN"],
+                                         fb_video_id=res["video_id"])
                     if ig.get("success"):
                         entry["ig_media_id"] = ig["media_id"]
                         print(f"[Publish] Instagram Reel published: {ig['media_id']}")
