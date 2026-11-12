@@ -559,6 +559,47 @@ def publish_reel(video: Path, description: str, page_id: str, token: str, api: s
     return {"success": True, "video_id": vid}
 
 
+def publish_ig_reel(video: Path, caption: str, ig_user_id: str, token: str, api: str = "v22.0",
+                    publish: bool = True) -> dict:
+    """Instagram Reels via resumable upload: container -> binary upload -> wait FINISHED -> media_publish."""
+    g = f"https://graph.facebook.com/{api}"
+    c = requests.post(f"{g}/{ig_user_id}/media", data={
+        "media_type": "REELS", "upload_type": "resumable", "caption": caption[:2200],
+        "share_to_feed": "true", "access_token": token}, timeout=60).json()
+    cid = c.get("id")
+    if not cid:
+        return {"success": False, "error": c}
+    # rupload only accepts some API versions for this app (v21.0 verified; the returned uri / newer ones can fail
+    # with ProcessingFailedError), so try a short list until one succeeds.
+    payload = Path(video).read_bytes()
+    urls = [f"https://rupload.facebook.com/ig-api-upload/v21.0/{cid}", c.get("uri"),
+            f"https://rupload.facebook.com/ig-api-upload/v20.0/{cid}"]
+    up = {}
+    for upload_url in [u for u in urls if u]:
+        up = requests.post(upload_url, headers={"Authorization": f"OAuth {token}", "offset": "0",
+                                                "file_size": str(len(payload)),
+                                                "Content-Type": "application/octet-stream"},
+                           data=payload, timeout=300).json()
+        if up.get("success"):
+            break
+    if not up.get("success"):
+        return {"success": False, "error": up}
+    status = {}
+    for _ in range(40):  # up to ~6.5 minutes of processing
+        time.sleep(10)
+        status = requests.get(f"{g}/{cid}", params={"fields": "status_code,status", "access_token": token}, timeout=30).json()
+        if status.get("status_code") in ("FINISHED", "ERROR", "EXPIRED"):
+            break
+    if status.get("status_code") != "FINISHED":
+        return {"success": False, "error": status, "container": cid}
+    if not publish:
+        return {"success": True, "container": cid, "published": False}
+    pub = requests.post(f"{g}/{ig_user_id}/media_publish", data={"creation_id": cid, "access_token": token}, timeout=60).json()
+    if not pub.get("id"):
+        return {"success": False, "error": pub, "container": cid}
+    return {"success": True, "media_id": pub["id"]}
+
+
 # =============================================================================== one run
 def make_one(dry_run: bool) -> dict:
     WORK.mkdir(exist_ok=True)
@@ -611,9 +652,20 @@ def make_one(dry_run: bool) -> dict:
                 print(f"[Publish] FAILED: {str(res.get('error'))[:300]}")
                 return {"ok": False}
             entry["video_id"] = res["video_id"]
+            print(f"[Publish] Facebook Reel published: {res['video_id']}")
+            ig_id = os.getenv("IG_USER_ID", "").strip()
+            if ig_id:
+                try:
+                    ig = publish_ig_reel(video, caption, ig_id, os.environ["FB_PAGE_ACCESS_TOKEN"])
+                    if ig.get("success"):
+                        entry["ig_media_id"] = ig["media_id"]
+                        print(f"[Publish] Instagram Reel published: {ig['media_id']}")
+                    else:
+                        print(f"[Publish] Instagram FAILED (Facebook post stands): {str(ig.get('error'))[:300]}")
+                except Exception as e:
+                    print(f"[Publish] Instagram error (Facebook post stands): {e}")
             history.append(entry)
             save_history(history)
-            print(f"[Publish] Reel published: {res['video_id']}")
             return {"ok": True, "video": str(video), "entry": entry}
         except Exception as e:
             print(f"[Doodlore] Skipping '{topic['title']}': {e}")
