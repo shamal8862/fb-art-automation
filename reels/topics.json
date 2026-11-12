@@ -1,0 +1,1290 @@
+[
+ {
+  "title": "Prometheus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Emu War",
+  "pillar": "history"
+ },
+ {
+  "title": "OK",
+  "pillar": "origin"
+ },
+ {
+  "title": "Medusa",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Molasses Flood",
+  "pillar": "history"
+ },
+ {
+  "title": "Knocking on wood",
+  "pillar": "origin"
+ },
+ {
+  "title": "Trojan Horse",
+  "pillar": "myth"
+ },
+ {
+  "title": "Defenestrations of Prague",
+  "pillar": "history"
+ },
+ {
+  "title": "Friday the 13th",
+  "pillar": "origin"
+ },
+ {
+  "title": "Achilles",
+  "pillar": "myth"
+ },
+ {
+  "title": "War of the Bucket",
+  "pillar": "history"
+ },
+ {
+  "title": "Black cat",
+  "pillar": "origin"
+ },
+ {
+  "title": "Midas",
+  "pillar": "myth"
+ },
+ {
+  "title": "Anglo-Zanzibar War",
+  "pillar": "history"
+ },
+ {
+  "title": "Wedding ring",
+  "pillar": "origin"
+ },
+ {
+  "title": "Narcissus (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Stink",
+  "pillar": "history"
+ },
+ {
+  "title": "Birthday cake",
+  "pillar": "origin"
+ },
+ {
+  "title": "Icarus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tulip mania",
+  "pillar": "history"
+ },
+ {
+  "title": "Halloween",
+  "pillar": "origin"
+ },
+ {
+  "title": "Orpheus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Cadaver Synod",
+  "pillar": "history"
+ },
+ {
+  "title": "Jack-o'-lantern",
+  "pillar": "origin"
+ },
+ {
+  "title": "Sisyphus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Pig War (1859)",
+  "pillar": "history"
+ },
+ {
+  "title": "Christmas tree",
+  "pillar": "origin"
+ },
+ {
+  "title": "Tantalus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Moon Hoax",
+  "pillar": "history"
+ },
+ {
+  "title": "Santa Claus",
+  "pillar": "origin"
+ },
+ {
+  "title": "Arachne",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mary Toft",
+  "pillar": "history"
+ },
+ {
+  "title": "Easter Bunny",
+  "pillar": "origin"
+ },
+ {
+  "title": "Echo (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Cottingley Fairies",
+  "pillar": "history"
+ },
+ {
+  "title": "Valentine's Day",
+  "pillar": "origin"
+ },
+ {
+  "title": "Persephone",
+  "pillar": "myth"
+ },
+ {
+  "title": "Year Without a Summer",
+  "pillar": "history"
+ },
+ {
+  "title": "April Fools' Day",
+  "pillar": "origin"
+ },
+ {
+  "title": "Cerberus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tunguska event",
+  "pillar": "history"
+ },
+ {
+  "title": "Groundhog Day",
+  "pillar": "origin"
+ },
+ {
+  "title": "Minotaur",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Fire of London",
+  "pillar": "history"
+ },
+ {
+  "title": "Tooth fairy",
+  "pillar": "origin"
+ },
+ {
+  "title": "Labours of Hercules",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mary Celeste",
+  "pillar": "history"
+ },
+ {
+  "title": "Mistletoe",
+  "pillar": "origin"
+ },
+ {
+  "title": "Odysseus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Roanoke Colony",
+  "pillar": "history"
+ },
+ {
+  "title": "Piñata",
+  "pillar": "origin"
+ },
+ {
+  "title": "Polyphemus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Voynich manuscript",
+  "pillar": "history"
+ },
+ {
+  "title": "Sandwich",
+  "pillar": "origin"
+ },
+ {
+  "title": "Siren (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Antikythera mechanism",
+  "pillar": "history"
+ },
+ {
+  "title": "Necktie",
+  "pillar": "origin"
+ },
+ {
+  "title": "Scylla",
+  "pillar": "myth"
+ },
+ {
+  "title": "Phaistos Disc",
+  "pillar": "history"
+ },
+ {
+  "title": "High-heeled shoe",
+  "pillar": "origin"
+ },
+ {
+  "title": "Atlas (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Library of Alexandria",
+  "pillar": "history"
+ },
+ {
+  "title": "Handshake",
+  "pillar": "origin"
+ },
+ {
+  "title": "Pegasus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Colossus of Rhodes",
+  "pillar": "history"
+ },
+ {
+  "title": "Toast (honor)",
+  "pillar": "origin"
+ },
+ {
+  "title": "Golden Fleece",
+  "pillar": "myth"
+ },
+ {
+  "title": "Hanging Gardens of Babylon",
+  "pillar": "history"
+ },
+ {
+  "title": "Salute",
+  "pillar": "origin"
+ },
+ {
+  "title": "Cassandra",
+  "pillar": "myth"
+ },
+ {
+  "title": "Terracotta Army",
+  "pillar": "history"
+ },
+ {
+  "title": "Charles Boycott",
+  "pillar": "origin"
+ },
+ {
+  "title": "Pythia",
+  "pillar": "myth"
+ },
+ {
+  "title": "Pompeii",
+  "pillar": "history"
+ },
+ {
+  "title": "Ambrose Burnside",
+  "pillar": "origin"
+ },
+ {
+  "title": "Lernaean Hydra",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tollund Man",
+  "pillar": "history"
+ },
+ {
+  "title": "Guillotine",
+  "pillar": "origin"
+ },
+ {
+  "title": "Phoenix (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Sutton Hoo",
+  "pillar": "history"
+ },
+ {
+  "title": "Étienne de Silhouette",
+  "pillar": "origin"
+ },
+ {
+  "title": "Daedalus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Rosetta Stone",
+  "pillar": "history"
+ },
+ {
+  "title": "Pheidippides",
+  "pillar": "origin"
+ },
+ {
+  "title": "Theseus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Nazca lines",
+  "pillar": "history"
+ },
+ {
+  "title": "Laconic phrase",
+  "pillar": "origin"
+ },
+ {
+  "title": "Perseus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Moai",
+  "pillar": "history"
+ },
+ {
+  "title": "Pan (god)",
+  "pillar": "origin"
+ },
+ {
+  "title": "Bellerophon",
+  "pillar": "myth"
+ },
+ {
+  "title": "Stonehenge",
+  "pillar": "history"
+ },
+ {
+  "title": "Ceres (mythology)",
+  "pillar": "origin"
+ },
+ {
+  "title": "Chimera (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Carnac stones",
+  "pillar": "history"
+ },
+ {
+  "title": "Vulcan (mythology)",
+  "pillar": "origin"
+ },
+ {
+  "title": "Charon",
+  "pillar": "myth"
+ },
+ {
+  "title": "Ravens of the Tower of London",
+  "pillar": "history"
+ },
+ {
+  "title": "Names of the days of the week",
+  "pillar": "origin"
+ },
+ {
+  "title": "Styx",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tarrare",
+  "pillar": "history"
+ },
+ {
+  "title": "Hygieia",
+  "pillar": "origin"
+ },
+ {
+  "title": "Elysium",
+  "pillar": "myth"
+ },
+ {
+  "title": "Phineas Gage",
+  "pillar": "history"
+ },
+ {
+  "title": "Horseshoe",
+  "pillar": "origin"
+ },
+ {
+  "title": "Nemesis",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tanganyika laughter epidemic",
+  "pillar": "history"
+ },
+ {
+  "title": "Four-leaf clover",
+  "pillar": "origin"
+ },
+ {
+  "title": "Romulus and Remus",
+  "pillar": "myth"
+ },
+ {
+  "title": "London Beer Flood",
+  "pillar": "history"
+ },
+ {
+  "title": "Umbrella",
+  "pillar": "origin"
+ },
+ {
+  "title": "Aeneas",
+  "pillar": "myth"
+ },
+ {
+  "title": "Halifax Explosion",
+  "pillar": "history"
+ },
+ {
+  "title": "Fork",
+  "pillar": "origin"
+ },
+ {
+  "title": "Cupid and Psyche",
+  "pillar": "myth"
+ },
+ {
+  "title": "Darien scheme",
+  "pillar": "history"
+ },
+ {
+  "title": "Playing card",
+  "pillar": "origin"
+ },
+ {
+  "title": "Pyramus and Thisbe",
+  "pillar": "myth"
+ },
+ {
+  "title": "South Sea Company",
+  "pillar": "history"
+ },
+ {
+  "title": "Chess",
+  "pillar": "origin"
+ },
+ {
+  "title": "Baucis and Philemon",
+  "pillar": "myth"
+ },
+ {
+  "title": "Animal trial",
+  "pillar": "history"
+ },
+ {
+  "title": "Tarot",
+  "pillar": "origin"
+ },
+ {
+  "title": "Pygmalion (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Children's Crusade",
+  "pillar": "history"
+ },
+ {
+  "title": "Board game",
+  "pillar": "origin"
+ },
+ {
+  "title": "Actaeon",
+  "pillar": "myth"
+ },
+ {
+  "title": "Pope Joan",
+  "pillar": "history"
+ },
+ {
+  "title": "Calendar",
+  "pillar": "origin"
+ },
+ {
+  "title": "Niobe",
+  "pillar": "myth"
+ },
+ {
+  "title": "Man in the Iron Mask",
+  "pillar": "history"
+ },
+ {
+  "title": "Leap year",
+  "pillar": "origin"
+ },
+ {
+  "title": "Tithonus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Kaspar Hauser",
+  "pillar": "history"
+ },
+ {
+  "title": "Month",
+  "pillar": "origin"
+ },
+ {
+  "title": "Endymion (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Lady Godiva",
+  "pillar": "history"
+ },
+ {
+  "title": "Zodiac",
+  "pillar": "origin"
+ },
+ {
+  "title": "Hyacinth (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Incitatus",
+  "pillar": "history"
+ },
+ {
+  "title": "Constellation",
+  "pillar": "origin"
+ },
+ {
+  "title": "Atalanta",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Fire of Rome",
+  "pillar": "history"
+ },
+ {
+  "title": "Astrolabe",
+  "pillar": "origin"
+ },
+ {
+  "title": "Calypso (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Diogenes",
+  "pillar": "history"
+ },
+ {
+  "title": "Hourglass",
+  "pillar": "origin"
+ },
+ {
+  "title": "Circe",
+  "pillar": "myth"
+ },
+ {
+  "title": "Hypatia",
+  "pillar": "history"
+ },
+ {
+  "title": "Sundial",
+  "pillar": "origin"
+ },
+ {
+  "title": "Penelope",
+  "pillar": "myth"
+ },
+ {
+  "title": "Eureka (word)",
+  "pillar": "history"
+ },
+ {
+  "title": "Clock",
+  "pillar": "origin"
+ },
+ {
+  "title": "Argus Panoptes",
+  "pillar": "myth"
+ },
+ {
+  "title": "Galileo affair",
+  "pillar": "history"
+ },
+ {
+  "title": "Glasses",
+  "pillar": "origin"
+ },
+ {
+  "title": "Sword of Damocles",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tycho Brahe",
+  "pillar": "history"
+ },
+ {
+  "title": "Printing press",
+  "pillar": "origin"
+ },
+ {
+  "title": "Gordian Knot",
+  "pillar": "myth"
+ },
+ {
+  "title": "Isaac Newton",
+  "pillar": "history"
+ },
+ {
+  "title": "Paper money",
+  "pillar": "origin"
+ },
+ {
+  "title": "Janus",
+  "pillar": "myth"
+ },
+ {
+  "title": "Kite experiment",
+  "pillar": "history"
+ },
+ {
+  "title": "Coin",
+  "pillar": "origin"
+ },
+ {
+  "title": "Ragnarök",
+  "pillar": "myth"
+ },
+ {
+  "title": "War of the currents",
+  "pillar": "history"
+ },
+ {
+  "title": "Postage stamp",
+  "pillar": "origin"
+ },
+ {
+  "title": "Yggdrasil",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Exhibition",
+  "pillar": "history"
+ },
+ {
+  "title": "Penny Black",
+  "pillar": "origin"
+ },
+ {
+  "title": "Fenrir",
+  "pillar": "myth"
+ },
+ {
+  "title": "The Crystal Palace",
+  "pillar": "history"
+ },
+ {
+  "title": "Teddy bear",
+  "pillar": "origin"
+ },
+ {
+  "title": "Thor",
+  "pillar": "myth"
+ },
+ {
+  "title": "Vasa (ship)",
+  "pillar": "history"
+ },
+ {
+  "title": "Rubber duck",
+  "pillar": "origin"
+ },
+ {
+  "title": "Loki",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mary Rose",
+  "pillar": "history"
+ },
+ {
+  "title": "Kaleidoscope",
+  "pillar": "origin"
+ },
+ {
+  "title": "Odin",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Chicago Fire",
+  "pillar": "history"
+ },
+ {
+  "title": "Magic lantern",
+  "pillar": "origin"
+ },
+ {
+  "title": "Valhalla",
+  "pillar": "myth"
+ },
+ {
+  "title": "Johnstown Flood",
+  "pillar": "history"
+ },
+ {
+  "title": "Zoetrope",
+  "pillar": "origin"
+ },
+ {
+  "title": "Valkyrie",
+  "pillar": "myth"
+ },
+ {
+  "title": "1883 eruption of Krakatoa",
+  "pillar": "history"
+ },
+ {
+  "title": "Christmas card",
+  "pillar": "origin"
+ },
+ {
+  "title": "Mjölnir",
+  "pillar": "myth"
+ },
+ {
+  "title": "Black Death",
+  "pillar": "history"
+ },
+ {
+  "title": "Advent calendar",
+  "pillar": "origin"
+ },
+ {
+  "title": "Sleipnir",
+  "pillar": "myth"
+ },
+ {
+  "title": "Plague doctor costume",
+  "pillar": "history"
+ },
+ {
+  "title": "Easter egg",
+  "pillar": "origin"
+ },
+ {
+  "title": "Jörmungandr",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mary Mallon",
+  "pillar": "history"
+ },
+ {
+  "title": "May Day",
+  "pillar": "origin"
+ },
+ {
+  "title": "Baldr",
+  "pillar": "myth"
+ },
+ {
+  "title": "Body snatching",
+  "pillar": "history"
+ },
+ {
+  "title": "Maypole",
+  "pillar": "origin"
+ },
+ {
+  "title": "Iðunn",
+  "pillar": "myth"
+ },
+ {
+  "title": "Gin Craze",
+  "pillar": "history"
+ },
+ {
+  "title": "Morris dance",
+  "pillar": "origin"
+ },
+ {
+  "title": "Bifröst",
+  "pillar": "myth"
+ },
+ {
+  "title": "Post-mortem photography",
+  "pillar": "history"
+ },
+ {
+  "title": "Carnival",
+  "pillar": "origin"
+ },
+ {
+  "title": "Freyja",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tower of London",
+  "pillar": "history"
+ },
+ {
+  "title": "Masquerade ball",
+  "pillar": "origin"
+ },
+ {
+  "title": "Draugr",
+  "pillar": "myth"
+ },
+ {
+  "title": "Hatshepsut",
+  "pillar": "history"
+ },
+ {
+  "title": "Fireworks",
+  "pillar": "origin"
+ },
+ {
+  "title": "Kraken",
+  "pillar": "myth"
+ },
+ {
+  "title": "Cleopatra",
+  "pillar": "history"
+ },
+ {
+  "title": "Bonfire Night",
+  "pillar": "origin"
+ },
+ {
+  "title": "Osiris myth",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mechanical Turk",
+  "pillar": "history"
+ },
+ {
+  "title": "Gargoyle",
+  "pillar": "origin"
+ },
+ {
+  "title": "Ra",
+  "pillar": "myth"
+ },
+ {
+  "title": "Piltdown Man",
+  "pillar": "history"
+ },
+ {
+  "title": "Green Man",
+  "pillar": "origin"
+ },
+ {
+  "title": "Anubis",
+  "pillar": "myth"
+ },
+ {
+  "title": "Cardiff Giant",
+  "pillar": "history"
+ },
+ {
+  "title": "Labyrinth",
+  "pillar": "origin"
+ },
+ {
+  "title": "Bastet",
+  "pillar": "myth"
+ },
+ {
+  "title": "Fiji mermaid",
+  "pillar": "history"
+ },
+ {
+  "title": "Ouroboros",
+  "pillar": "origin"
+ },
+ {
+  "title": "Thoth",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Wall of China",
+  "pillar": "history"
+ },
+ {
+  "title": "Caduceus",
+  "pillar": "origin"
+ },
+ {
+  "title": "Great Sphinx of Giza",
+  "pillar": "myth"
+ },
+ {
+  "title": "Lighthouse of Alexandria",
+  "pillar": "history"
+ },
+ {
+  "title": "Rod of Asclepius",
+  "pillar": "origin"
+ },
+ {
+  "title": "Curse of the pharaohs",
+  "pillar": "myth"
+ },
+ {
+  "title": "Statue of Zeus at Olympia",
+  "pillar": "history"
+ },
+ {
+  "title": "Evil eye",
+  "pillar": "origin"
+ },
+ {
+  "title": "King Arthur",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mausoleum at Halicarnassus",
+  "pillar": "history"
+ },
+ {
+  "title": "Rabbit's foot",
+  "pillar": "origin"
+ },
+ {
+  "title": "Excalibur",
+  "pillar": "myth"
+ },
+ {
+  "title": "Temple of Artemis",
+  "pillar": "history"
+ },
+ {
+  "title": "Dreamcatcher",
+  "pillar": "origin"
+ },
+ {
+  "title": "Merlin",
+  "pillar": "myth"
+ },
+ {
+  "title": "Great Pyramid of Giza",
+  "pillar": "history"
+ },
+ {
+  "title": "Totem pole",
+  "pillar": "origin"
+ },
+ {
+  "title": "Holy Grail",
+  "pillar": "myth"
+ },
+ {
+  "title": "Easter Island",
+  "pillar": "history"
+ },
+ {
+  "title": "Scarecrow",
+  "pillar": "origin"
+ },
+ {
+  "title": "Lady of the Lake",
+  "pillar": "myth"
+ },
+ {
+  "title": "Franklin's lost expedition",
+  "pillar": "history"
+ },
+ {
+  "title": "Weather vane",
+  "pillar": "origin"
+ },
+ {
+  "title": "Banshee",
+  "pillar": "myth"
+ },
+ {
+  "title": "Dancing mania",
+  "pillar": "history"
+ },
+ {
+  "title": "Lighthouse",
+  "pillar": "origin"
+ },
+ {
+  "title": "Selkie",
+  "pillar": "myth"
+ },
+ {
+  "title": "Benjamin Franklin",
+  "pillar": "history"
+ },
+ {
+  "title": "Loch Ness Monster",
+  "pillar": "myth"
+ },
+ {
+  "title": "Ada Lovelace",
+  "pillar": "history"
+ },
+ {
+  "title": "Robin Hood",
+  "pillar": "myth"
+ },
+ {
+  "title": "Grigori Rasputin",
+  "pillar": "history"
+ },
+ {
+  "title": "Will-o'-the-wisp",
+  "pillar": "myth"
+ },
+ {
+  "title": "Bayeux Tapestry",
+  "pillar": "history"
+ },
+ {
+  "title": "Tír na nÓg",
+  "pillar": "myth"
+ },
+ {
+  "title": "Magna Carta",
+  "pillar": "history"
+ },
+ {
+  "title": "Changeling",
+  "pillar": "myth"
+ },
+ {
+  "title": "Domesday Book",
+  "pillar": "history"
+ },
+ {
+  "title": "Leprechaun",
+  "pillar": "myth"
+ },
+ {
+  "title": "Gunpowder Plot",
+  "pillar": "history"
+ },
+ {
+  "title": "Fairy ring",
+  "pillar": "myth"
+ },
+ {
+  "title": "Salem witch trials",
+  "pillar": "history"
+ },
+ {
+  "title": "Wild Hunt",
+  "pillar": "myth"
+ },
+ {
+  "title": "Trial by ordeal",
+  "pillar": "history"
+ },
+ {
+  "title": "Golem",
+  "pillar": "myth"
+ },
+ {
+  "title": "Duel",
+  "pillar": "history"
+ },
+ {
+  "title": "Baba Yaga",
+  "pillar": "myth"
+ },
+ {
+  "title": "Bread and circuses",
+  "pillar": "history"
+ },
+ {
+  "title": "Pied Piper of Hamelin",
+  "pillar": "myth"
+ },
+ {
+  "title": "Roman roads",
+  "pillar": "history"
+ },
+ {
+  "title": "Flying Dutchman",
+  "pillar": "myth"
+ },
+ {
+  "title": "Greek fire",
+  "pillar": "history"
+ },
+ {
+  "title": "El Dorado",
+  "pillar": "myth"
+ },
+ {
+  "title": "Trebuchet",
+  "pillar": "history"
+ },
+ {
+  "title": "Atlantis",
+  "pillar": "myth"
+ },
+ {
+  "title": "Viking ship",
+  "pillar": "history"
+ },
+ {
+  "title": "Kitsune",
+  "pillar": "myth"
+ },
+ {
+  "title": "Lindisfarne",
+  "pillar": "history"
+ },
+ {
+  "title": "Tengu",
+  "pillar": "myth"
+ },
+ {
+  "title": "Ship burial",
+  "pillar": "history"
+ },
+ {
+  "title": "Kappa (folklore)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Bog body",
+  "pillar": "history"
+ },
+ {
+  "title": "Yuki-onna",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mummy",
+  "pillar": "history"
+ },
+ {
+  "title": "Epic of Gilgamesh",
+  "pillar": "myth"
+ },
+ {
+  "title": "Construction of the Egyptian pyramids",
+  "pillar": "history"
+ },
+ {
+  "title": "Tower of Babel",
+  "pillar": "myth"
+ },
+ {
+  "title": "Krampus",
+  "pillar": "myth"
+ },
+ {
+  "title": "La Llorona",
+  "pillar": "myth"
+ },
+ {
+  "title": "Anansi",
+  "pillar": "myth"
+ },
+ {
+  "title": "Jinn",
+  "pillar": "myth"
+ },
+ {
+  "title": "Aladdin",
+  "pillar": "myth"
+ },
+ {
+  "title": "Sinbad the Sailor",
+  "pillar": "myth"
+ },
+ {
+  "title": "Roc (mythology)",
+  "pillar": "myth"
+ },
+ {
+  "title": "Garuda",
+  "pillar": "myth"
+ },
+ {
+  "title": "Sun Wukong",
+  "pillar": "myth"
+ },
+ {
+  "title": "Chang'e",
+  "pillar": "myth"
+ },
+ {
+  "title": "Moon rabbit",
+  "pillar": "myth"
+ },
+ {
+  "title": "Fountain of Youth",
+  "pillar": "myth"
+ },
+ {
+  "title": "Prester John",
+  "pillar": "myth"
+ },
+ {
+  "title": "Wandering Jew",
+  "pillar": "myth"
+ },
+ {
+  "title": "Vampire",
+  "pillar": "myth"
+ },
+ {
+  "title": "Werewolf",
+  "pillar": "myth"
+ },
+ {
+  "title": "Mermaid",
+  "pillar": "myth"
+ },
+ {
+  "title": "Unicorn",
+  "pillar": "myth"
+ },
+ {
+  "title": "Basilisk",
+  "pillar": "myth"
+ },
+ {
+  "title": "Griffin",
+  "pillar": "myth"
+ },
+ {
+  "title": "Manticore",
+  "pillar": "myth"
+ },
+ {
+  "title": "Sea serpent",
+  "pillar": "myth"
+ },
+ {
+  "title": "Nidhogg",
+  "pillar": "myth"
+ },
+ {
+  "title": "Beowulf",
+  "pillar": "myth"
+ },
+ {
+  "title": "Grendel",
+  "pillar": "myth"
+ },
+ {
+  "title": "Tristan and Iseult",
+  "pillar": "myth"
+ }
+]

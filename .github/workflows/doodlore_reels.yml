@@ -1,0 +1,55 @@
+name: Doodlore Reels Publisher
+
+on:
+  # PRIMARY TRIGGER: external cron (cron-job.org) calls workflow_dispatch 3 times a day.
+  # GitHub's own scheduler drops most cron runs, so it is only a sparse backup.
+  # run_reel.py refuses to post if the last Reel was less than MIN_GAP_HOURS ago.
+  workflow_dispatch:
+  schedule:
+    - cron: '20 */12 * * *'
+
+concurrency:
+  group: publish-doodlore-reels
+  cancel-in-progress: false
+
+jobs:
+  publish-reel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: reels/requirements.txt
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r reels/requirements.txt
+
+      - name: Make and Publish One Reel
+        env:
+          GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          DRY_RUN: 'false'
+          MIN_GAP_HOURS: '4'
+        run: python -u reels/run_reel.py
+
+      - name: Commit Reel History
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reels/history.json reels/topics.json
+          git diff --staged --quiet || (git commit -m "chore: update doodlore reels history [skip ci]" && git pull --rebase origin main && git push origin HEAD:main)
