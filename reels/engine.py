@@ -415,8 +415,9 @@ def _logo():
 def scene_base(paper, art: Image.Image = None) -> Image.Image:
     img = paper.copy()
     logo = _logo()
-    lg = logo.resize((360, int(logo.height * 360 / logo.width)), Image.LANCZOS)
-    img.paste(lg, ((W - lg.width) // 2, 140 - lg.height // 2), lg)
+    if art is not None:  # small top logo on story scenes only; the end card has the large centred logo
+        lg = logo.resize((360, int(logo.height * 360 / logo.width)), Image.LANCZOS)
+        img.paste(lg, ((W - lg.width) // 2, 140 - lg.height // 2), lg)
     d = ImageDraw.Draw(img)
     if art is not None:
         art = ImageOps.exif_transpose(art)
