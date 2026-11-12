@@ -19,5 +19,27 @@
   "date": "2026-11-12T14:34:59.378067+00:00",
   "status": "posted",
   "video_id": "1151292090573834"
+ },
+ {
+  "title": "OK",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: It might just be the most frequently spoken word on the plan",
+  "date": "2026-11-12T14:55:41.715386+00:00"
+ },
+ {
+  "title": "Medusa",
+  "pillar": "myth",
+  "art": [
+   "File:Ugo Bongarzoni - Medusa - 50x60 - bas-relief on canvas - Roma 2003 - 2011.jpg",
+   "File:Theylaytheblameonme (ver. 2).png",
+   "File:Woodcut illustration of Medusa and Neptune embracing beside a winged horse (either Pegasus or Chrysaor), with Perseus mounted upon Pegasus (following later developments of the Perseus legend) in the background - Penn Provenance Project.jpg",
+   "File:Theodoor van Thulden - Athena and Pegasus (1654).jpg",
+   "File:Perseus Confronting Phineus with the Head of Medusa by Sebastiano Ricci, c. 1705-10.JPG",
+   "File:Marble statue of Athena, Louvre.jpg"
+  ],
+  "date": "2026-11-12T14:58:39.560635+00:00",
+  "status": "posted",
+  "video_id": "1843207786883255"
  }
 ]
