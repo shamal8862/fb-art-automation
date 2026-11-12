@@ -71,6 +71,8 @@ def gemini_json(prompt: str, images: list = None, temperature: float = 0.6) -> d
             except Exception as e:
                 last = e
                 print(f"[Gemini] {model} failed: {str(e)[:90]}")
+                if "503" in str(e) or "UNAVAILABLE" in str(e):
+                    break  # model-wide overload: other keys won't help, try the next model
                 time.sleep(1)
     raise RuntimeError(f"Gemini failed on all models/keys: {str(last)[:200]}")
 
@@ -149,6 +151,8 @@ SOURCE>>>
 RULES
 - Every fact must be supported by the source. If the source says a detail is disputed, uncertain or legendary,
   say so ("according to legend", "historians still debate").
+- Do not add facts through adjectives or numbers that are not in the source (no "giant", "thousands", "officially",
+  "long before" unless the source says so). Vivid verbs are fine; invented details are not.
 - Structure: a scroll-stopping hook, a story with a clear arc, and a satisfying twist or reveal near the end.
 - Exactly 6 scenes. Scene 1 is the hook (one short sentence). Each other scene: 1-2 complete sentences.
 - Total narration 105-135 words. Plain spoken English, no lists, no emojis, no hashtags in scenes.
@@ -166,9 +170,11 @@ Return JSON:
   "caption_title": "...", "caption_body": "...", "question": "...", "hashtags": ["#a", "#b", "#c", "#d", "#e"]}}
 {feedback}"""
 
-QA_PROMPT = """You are a strict fact-checker. Compare EVERY sentence of the NARRATION and CAPTION against the SOURCE.
-A sentence passes only if the source supports it (paraphrase is fine). Disputed or legendary details must be framed as
-such. Also fail anything not family-friendly or any sentence that is cut off / incomplete.
+QA_PROMPT = """You are a fact-checker. Compare EVERY sentence of the NARRATION and CAPTION against the SOURCE.
+List as "material" only real problems: a claim that is false, contradicts the source, invents a specific fact (name,
+date, number, event, cause) not in the source, presents a disputed or legendary detail as certain, is not
+family-friendly, or is cut off / incomplete. Storytelling wording, mild figurative language or a harmless descriptive
+adjective (e.g. "mighty", "giant" for a creature the source calls large or monstrous) is "minor", not material.
 
 SOURCE:
 <<<
@@ -181,12 +187,12 @@ NARRATION:
 CAPTION:
 {caption}
 
-Return JSON: {{"pass": true/false, "problems": ["sentence -> what is wrong", ...]}}"""
+Return JSON: {{"material": ["sentence -> what is wrong", ...], "minor": ["..."]}}"""
 
 
 def write_script(topic: dict, article: dict) -> dict:
     feedback = ""
-    for attempt in range(2):
+    for attempt in range(3):
         data = gemini_json(WRITER_PROMPT.format(title=topic["title"], pillar=topic["pillar"],
                                                 source=article["text"], feedback=feedback), temperature=0.8)
         scenes = [s for s in data.get("scenes", []) if s.get("text")]
@@ -203,13 +209,16 @@ def write_script(topic: dict, article: dict) -> dict:
             narration = "\n".join(s["text"] for s in scenes)
             caption = data.get("caption_title", "") + "\n" + data.get("caption_body", "")
             qa = gemini_json(QA_PROMPT.format(source=article["text"], narration=narration, caption=caption), temperature=0.1)
-            if qa.get("pass"):
+            material = qa.get("material") or []
+            if not material:
+                if qa.get("minor"):
+                    print(f"[QA] passed with minor notes: {qa['minor'][:2]}")
                 data["scenes"] = scenes
                 return data
-            problems = qa.get("problems", ["failed fact check"])
+            problems = material
         print(f"[Writer] Attempt {attempt + 1} rejected: {problems[:4]}")
         feedback = "\nYOUR PREVIOUS DRAFT WAS REJECTED. Fix these problems:\n- " + "\n- ".join(map(str, problems[:8]))
-    raise ValueError("script failed fact-check twice")
+    raise ValueError("script failed fact-check three times")
 
 
 # =============================================================================== art
