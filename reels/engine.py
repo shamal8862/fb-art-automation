@@ -89,7 +89,10 @@ def save_history(items: list):
 
 
 def next_topics(history: list, n: int = 4) -> list:
-    done = {h["title"] for h in history}
+    """Unposted topics; a skipped topic is retried once 30 days have passed since it was skipped."""
+    now = datetime.now(timezone.utc)
+    done = {h["title"] for h in history if h.get("status") == "posted" or
+            (h.get("status") == "skipped" and (now - datetime.fromisoformat(h["date"])).days < 30)}
     topics = json.loads(TOPICS.read_text(encoding="utf-8"))
     return [t for t in topics if t["title"] not in done][:n]
 
@@ -160,6 +163,8 @@ RULES
 - For each scene give "art_query": a short Wikimedia Commons search (3-6 words) for a PUBLIC-DOMAIN artwork,
   engraving, illustration, museum object or pre-1930 photograph that shows that scene's subject. Name the subject
   plainly plus a medium word, e.g. "Medusa painting", "Thor hammer illustration", "Strasbourg engraving 16th century".
+  Prefer searches that name the story's own subject (e.g. "emu bird illustration", "Western Australia wheat farm 1930s")
+  over generic ones ("farm painting", "army photo").
   Also give "art_fallback": a broader search for the same scene.
 - Caption: "caption_title" (one punchy line, max 12 words), "caption_body" (2-3 short paragraphs, 70-120 words total,
   natural search keywords, no hashtags), "question" (one engaging comment question), "hashtags": exactly 5, lowercase
@@ -273,7 +278,7 @@ def _download(url: str) -> bytes:
     raise RuntimeError(f"download failed: {url[:80]}")
 
 
-def pick_art(scene_text: str, queries: list, used: set) -> dict:
+def pick_art(scene_text: str, queries: list, used: set, story: str = "") -> dict:
     """Searches Commons, downloads up to 4 candidates, and lets Gemini vision pick the safest best fit."""
     cands = []
     for q in queries:
@@ -307,7 +312,11 @@ def pick_art(scene_text: str, queries: list, used: set) -> dict:
     if not cands:
         return {}
     verdict = gemini_json(
-        f"You are choosing artwork for one scene of a family-friendly storybook Reel. Scene narration: \"{scene_text}\".\n"
+        f"You are choosing artwork for one scene of a family-friendly storybook Reel about \"{story}\". "
+        f"Scene narration: \"{scene_text}\".\n"
+        "The image must visibly relate to THIS story (its people, creatures, places, objects or era). A generic or "
+        "unrelated image that only loosely matches a word in the narration (e.g. a random farm painting, an unrelated "
+        "army photo) must get fit 3 or less.\n"
         f"There are {len(cands)} candidate images, in order (index 0..{len(cands) - 1}). For each, decide:\n"
         "- safe: FALSE if ANY genitals are visible, ANY female nipples are visible, there is blood, open wounds, torture or "
         "graphic violence, or a corpse. Classical figures are fine only when draped so these areas are covered. Be strict: this "
@@ -574,7 +583,8 @@ def make_one(dry_run: bool) -> dict:
             used, scenes, credits, art_titles = set(recent_art), [], [], []
             missing = 0
             for s in script["scenes"]:
-                art = pick_art(s["text"], [s.get("art_query"), s.get("art_fallback")], used)
+                art = pick_art(s["text"], [s.get("art_query"), s.get("art_fallback"), topic["title"] + " illustration"],
+                               used, story=topic["title"])
                 if not art:
                     missing += 1
                     if not scenes or missing > 1:
