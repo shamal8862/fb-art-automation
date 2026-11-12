@@ -1,1 +1,23 @@
-[]
+[
+ {
+  "title": "Prometheus",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "script failed fact-check twice",
+  "date": "2026-11-12T14:28:30.745716+00:00"
+ },
+ {
+  "title": "Emu War",
+  "pillar": "history",
+  "art": [
+   "File:Emu volume 3 frontispiece.jpg",
+   "File:AL-90 96th Aero Sq Album Image 000104 (14357510781).jpg",
+   "File:BRITISH MILITARY VEHICLES 1918-1939 KID3516.jpg",
+   "File:StateLibQld 2 183307 Artillery and ammunition at the Lytton army camp, Brisbane.jpg",
+   "File:Piet Mondriaan - Farm buildings with fence in foreground - 0333469 - Kunstmuseum Den Haag.jpg"
+  ],
+  "date": "2026-11-12T14:34:59.378067+00:00",
+  "status": "posted",
+  "video_id": "1151292090573834"
+ }
+]
