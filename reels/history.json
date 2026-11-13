@@ -156,5 +156,27 @@
   "status": "skipped",
   "reason": "no suitable art for: At its peak, a single bulb could cost more than ten times th",
   "date": "2026-11-13T10:52:31.692041+00:00"
+ },
+ {
+  "title": "Halloween",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: To light their way, soulers carried lanterns made from hollo",
+  "date": "2026-11-13T18:32:49.177493+00:00"
+ },
+ {
+  "title": "Orpheus",
+  "pillar": "myth",
+  "art": [
+   "File:Jacob van Staverden - Orpheus playing the lyre.jpg",
+   "File:The-flight-of-medea-with-the-argonauts.jpg",
+   "File:Robert Fagan (1761-1816) - Orpheus and Eurydice - 609100 - National Trust.jpg",
+   "File:Orpheus in Hades (de Young Museum).jpg",
+   "File:Jean-Baptiste-Camille Corot - Orpheus Leading Eurydice from the Underworld - Google Art Project.jpg",
+   "File:Orpheus tries to hold on to Eurydice (SM 17622z).png"
+  ],
+  "date": "2026-11-13T18:35:55.585165+00:00",
+  "status": "posted",
+  "video_id": "1071347862582534"
  }
 ]
