@@ -44,5 +44,33 @@
   "status": "posted",
   "video_id": "1843207786883255",
   "ig_media_id": "18606143134068111"
+ },
+ {
+  "title": "Great Molasses Flood",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Imagine being chased through city streets by a twenty-five-f",
+  "date": "2026-11-13T02:36:46.945455+00:00"
+ },
+ {
+  "title": "Knocking on wood",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: Across the globe, variations range from touching iron in Ita",
+  "date": "2026-11-13T02:43:31.054903+00:00"
+ },
+ {
+  "title": "Trojan Horse",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: An elite force of Greek warriors hid inside the womb of the ",
+  "date": "2026-11-13T02:54:42.492616+00:00"
+ },
+ {
+  "title": "Defenestrations of Prague",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-13T03:01:20.066543+00:00"
  }
 ]
