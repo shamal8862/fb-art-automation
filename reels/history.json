@@ -72,5 +72,33 @@
   "status": "skipped",
   "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
   "date": "2026-11-13T03:01:20.066543+00:00"
+ },
+ {
+  "title": "Friday the 13th",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-13T07:00:00.254697+00:00"
+ },
+ {
+  "title": "Achilles",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-13T07:02:56.952335+00:00"
+ },
+ {
+  "title": "War of the Bucket",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Did a medieval war truly begin over a stolen wooden bucket?",
+  "date": "2026-11-13T07:11:49.085595+00:00"
+ },
+ {
+  "title": "Black cat",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: In Scotland, the arrival of a black cat at a new home is sai",
+  "date": "2026-11-13T07:20:21.918582+00:00"
  }
 ]
