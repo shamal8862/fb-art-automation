@@ -208,6 +208,30 @@
   ],
   "date": "2026-11-14T02:36:37.251548+00:00",
   "status": "posted",
-  "video_id": "1128091363165005"
+  "video_id": "1128091363165005",
+  "ig_attempts": 1,
+  "ig_media_id": "18358640203170667"
+ },
+ {
+  "title": "Pig War (1859)",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Imagine a full-scale international war sparked by a single, ",
+  "date": "2026-11-14T06:49:00.075726+00:00"
+ },
+ {
+  "title": "Christmas tree",
+  "pillar": "origin",
+  "art": [
+   "File:The Christmas tree (Boston Public Library).jpg",
+   "File:Christmas tree 1858.jpg",
+   "File:Coventry-mystery-pageant-thomas-sharp-david-gee-1825.jpg",
+   "File:Martin Luther’s Christmas Tree.jpg",
+   "File:Victorian Christmas postcard by Raphael Tuck & Sons.jpg",
+   "File:Vatican City (VA), Petersplatz -- 2013 -- 3840-5.jpg"
+  ],
+  "date": "2026-11-14T06:57:17.602306+00:00",
+  "status": "posted",
+  "video_id": "1106194042227195"
  }
 ]
