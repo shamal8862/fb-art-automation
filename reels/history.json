@@ -233,6 +233,35 @@
   "date": "2026-11-14T06:57:17.602306+00:00",
   "status": "posted",
   "video_id": "1106194042227195",
-  "ig_attempts": 1
+  "ig_attempts": 2,
+  "ig_media_id": "18094410257234517"
+ },
+ {
+  "title": "Tantalus",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Have you ever wanted something that remained just out of rea",
+  "date": "2026-11-14T18:18:07.007061+00:00"
+ },
+ {
+  "title": "Great Moon Hoax",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Reporter Richard Adams Locke fabricated the entire story to ",
+  "date": "2026-11-14T18:20:28.368341+00:00"
+ },
+ {
+  "title": "Santa Claus",
+  "pillar": "origin",
+  "art": [
+   "File:Vintage Christmas illustration digitally enhanced by rawpixel-com-3.jpg",
+   "File:Giotto, Badia Polyptych, Bishop Nicholas, c1301, Uffizi.jpg",
+   "File:Sinterklaas schrijft een brief, RP-T-2015-41-1460.jpg",
+   "File:SantaClausCDV1872L.R.Bronk-rwLIPACK-ownerA.jpg",
+   "File:Harpers 1863 01- thomas-nast-santa-claus.jpg"
+  ],
+  "date": "2026-11-14T18:24:01.174714+00:00",
+  "status": "posted",
+  "video_id": "4609295736024384"
  }
 ]
