@@ -263,6 +263,35 @@
   "date": "2026-11-14T18:24:01.174714+00:00",
   "status": "posted",
   "video_id": "4609295736024384",
-  "ig_attempts": 1
+  "ig_attempts": 2,
+  "ig_media_id": "18232637437329251"
+ },
+ {
+  "title": "Arachne",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Overcome with shame, Arachne hanged herself, but a remorsefu",
+  "date": "2026-11-15T02:33:54.576972+00:00"
+ },
+ {
+  "title": "Mary Toft",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: She soon confessed that the entire ordeal was a hoax put upo",
+  "date": "2026-11-15T02:36:21.033889+00:00"
+ },
+ {
+  "title": "Easter Bunny",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: A German text from 1572 advised people not to worry if the c",
+  "date": "2026-11-15T02:38:14.890593+00:00"
+ },
+ {
+  "title": "Echo (mythology)",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Grieving deeply, the nymph slowly wasted away until her bone",
+  "date": "2026-11-15T02:40:44.825407+00:00"
  }
 ]
