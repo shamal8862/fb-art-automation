@@ -381,5 +381,40 @@
   "video_id": "1133752976294935",
   "ig_attempts": 1,
   "ig_media_id": "17923473705452268"
+ },
+ {
+  "title": "Great Fire of London",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-16T18:33:04.247064+00:00"
+ },
+ {
+  "title": "Tooth fairy",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: You might assume the Tooth Fairy is an ancient, timeless fig",
+  "date": "2026-11-16T18:37:14.277708+00:00"
+ },
+ {
+  "title": "Labours of Hercules",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Although ten labours were originally assigned, the king disc",
+  "date": "2026-11-16T18:43:31.176905+00:00"
+ },
+ {
+  "title": "Mary Celeste",
+  "pillar": "history",
+  "art": [
+   "File:Mary Celeste as Amazon in 1861 (cropped).jpg",
+   "File:3rd Class Cabin.jpg",
+   "File:Maryland - Scene in the Court-House at Annapolis - Trial of Mrs. Wharton on the charge of murdering General Ketchum by poison - from a sketch by Jas. E. Taylor. LCCN2006683827.jpg",
+   "File:A giant squid observed off Teneriffe in November 1861.jpg",
+   "File:1913 Arthur Conan Doyle (cropped).jpg"
+  ],
+  "date": "2026-11-16T18:54:51.890866+00:00",
+  "status": "posted",
+  "video_id": "1576194767646499"
  }
 ]
