@@ -330,5 +330,33 @@
   "status": "posted",
   "video_id": "1658935535910513",
   "ig_media_id": "18136149361814432"
+ },
+ {
+  "title": "Year Without a Summer",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Frightened communities suffered through the freezing cold, e",
+  "date": "2026-11-16T02:33:33.123712+00:00"
+ },
+ {
+  "title": "April Fools' Day",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: Some believe it began when New Year's Day shifted to January",
+  "date": "2026-11-16T02:35:08.243451+00:00"
+ },
+ {
+  "title": "Cerberus",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Myth says that venomous bile created the world’s very first ",
+  "date": "2026-11-16T02:37:51.548289+00:00"
+ },
+ {
+  "title": "Tunguska event",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: On a clear summer morning in 1908, a flash brighter than the",
+  "date": "2026-11-16T02:38:30.221092+00:00"
  }
 ]
