@@ -447,5 +447,35 @@
   "status": "posted",
   "video_id": "1167816872457791",
   "ig_media_id": "17966183754251317"
+ },
+ {
+  "title": "Piñata",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: By the fourteenth century, Europeans were smashing earthenwa",
+  "date": "2026-11-17T08:07:46.549027+00:00"
+ },
+ {
+  "title": "Polyphemus",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Taking a fire-hardened wooden stake, the Greek sailors drove",
+  "date": "2026-11-17T08:15:11.646425+00:00"
+ },
+ {
+  "title": "Voynich manuscript",
+  "pillar": "history",
+  "art": [
+   "File:Voynich Manuscript (3).jpg",
+   "File:Voynich Manuscript (32).jpg",
+   "File:DroseraVoynichManuscriptF56r.jpg",
+   "File:Voynich Manuscript (20).jpg",
+   "File:68r.jpg",
+   "File:Voynich manuscript (head).jpg"
+  ],
+  "date": "2026-11-17T08:21:08.128053+00:00",
+  "status": "posted",
+  "video_id": "1658682379095946",
+  "ig_media_id": "17976678885156335"
  }
 ]
