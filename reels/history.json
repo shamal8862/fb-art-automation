@@ -416,6 +416,36 @@
   "date": "2026-11-16T18:54:51.890866+00:00",
   "status": "posted",
   "video_id": "1576194767646499",
-  "ig_attempts": 1
+  "ig_attempts": 2,
+  "ig_media_id": "17913439521589145"
+ },
+ {
+  "title": "Mistletoe",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: The story of mistletoe begins high in the treetop with a rat",
+  "date": "2026-11-17T02:32:37.433541+00:00"
+ },
+ {
+  "title": "Odysseus",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: To avoid joining a war, one legendary king feigned absolute ",
+  "date": "2026-11-17T02:33:21.290791+00:00"
+ },
+ {
+  "title": "Roanoke Colony",
+  "pillar": "history",
+  "art": [
+   "File:Croatoan Roanoke image from page 258 of Coast watch (1979).jpg",
+   "File:Landing of Maryland colonists from p148 of Our country in story (1917).jpg",
+   "File:AnthonyRoll-2 Mary Rose.jpg",
+   "File:Vroom Hendrick Cornelisz Battle between England and Spain 1601.jpg",
+   "File:Roanoke Croatoan mage from page 156 of Stories of American explorers - a historical reader (1906).jpg"
+  ],
+  "date": "2026-11-17T02:36:13.294008+00:00",
+  "status": "posted",
+  "video_id": "1167816872457791",
+  "ig_media_id": "17966183754251317"
  }
 ]
