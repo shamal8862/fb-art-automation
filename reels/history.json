@@ -507,5 +507,27 @@
   "status": "posted",
   "video_id": "2954013564954838",
   "ig_media_id": "18113327279236290"
+ },
+ {
+  "title": "Antikythera mechanism",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: In 1901, divers retrieved an unremarkable lump of corroded b",
+  "date": "2026-11-18T07:45:46.932380+00:00"
+ },
+ {
+  "title": "Necktie",
+  "pillar": "origin",
+  "art": [
+   "File:Dead Mans Glory BO (3452394008).jpg",
+   "File:Thirty Years War - siege of Saint-Jean-de-Losne, 1636 (engraving).jpg",
+   "File:Full and half dress for April 1809 (fashion plate).jpg",
+   "File:(Venice) Palazzo Mocenigo - Portego - Portrait de Louis XIV.jpg",
+   "File:Ronald Reagan and Neil 'Moon' Reagan, c. 1944.jpg"
+  ],
+  "date": "2026-11-18T07:57:29.797460+00:00",
+  "status": "posted",
+  "video_id": "1166240622415928",
+  "ig_media_id": "18125239532074433"
  }
 ]
