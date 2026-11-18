@@ -529,5 +529,33 @@
   "status": "posted",
   "video_id": "1166240622415928",
   "ig_media_id": "18125239532074433"
+ },
+ {
+  "title": "Scylla",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-18T18:30:55.256645+00:00"
+ },
+ {
+  "title": "Phaistos Disc",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Craftsmen created the forty-five distinct signs by pressing ",
+  "date": "2026-11-18T18:38:23.585580+00:00"
+ },
+ {
+  "title": "High-heeled shoe",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: You might think high heels are purely modern fashion, but th",
+  "date": "2026-11-18T18:44:38.411447+00:00"
+ },
+ {
+  "title": "Atlas (mythology)",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-18T18:47:18.395008+00:00"
  }
 ]
