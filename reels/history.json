@@ -613,5 +613,20 @@
   "status": "skipped",
   "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
   "date": "2026-11-19T18:59:06.520802+00:00"
+ },
+ {
+  "title": "Cassandra",
+  "pillar": "myth",
+  "art": [
+   "File:The Mythology of All Races Vol 1 - Plate 7-1.jpg",
+   "File:Fresco of Apollo and Cassandra from the newly excavated Black Room, Pompeii (cropped) (cropped Cassandra).jpg",
+   "File:Trojan horse MAN Napoli Inv120176.jpg",
+   "File:'The Sack of Troy' (1610) by Circle of Louis de Caullery - Museo Soumaya - Mexico 2024.jpg",
+   "File:The modern Cassandra - J.S. Pughe. LCCN2010652035.jpg"
+  ],
+  "date": "2026-11-19T20:54:01.706182+00:00",
+  "status": "posted",
+  "video_id": "3777986619015622",
+  "ig_media_id": "18104574641544206"
  }
 ]
