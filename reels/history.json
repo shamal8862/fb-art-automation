@@ -557,5 +557,33 @@
   "status": "skipped",
   "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
   "date": "2026-11-18T18:47:18.395008+00:00"
+ },
+ {
+  "title": "Library of Alexandria",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Imagine a place built to hold every single book in the ancie",
+  "date": "2026-11-19T10:33:12.824132+00:00"
+ },
+ {
+  "title": "Handshake",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-19T10:35:55.337471+00:00"
+ },
+ {
+  "title": "Pegasus",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-19T10:36:06.365752+00:00"
+ },
+ {
+  "title": "Colossus of Rhodes",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: In 226 BC, an earthquake snapped the statue at the knees, se",
+  "date": "2026-11-19T10:56:39.493130+00:00"
  }
 ]
