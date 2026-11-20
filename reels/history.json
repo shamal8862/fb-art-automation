@@ -628,5 +628,35 @@
   "status": "posted",
   "video_id": "3777986619015622",
   "ig_media_id": "18104574641544206"
+ },
+ {
+  "title": "Terracotta Army",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: The figures were once painted in brilliant colors, but expos",
+  "date": "2026-11-20T02:32:55.235125+00:00"
+ },
+ {
+  "title": "Charles Boycott",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: In response, the Irish National Land League urged the local ",
+  "date": "2026-11-20T02:34:32.022118+00:00"
+ },
+ {
+  "title": "Pythia",
+  "pillar": "myth",
+  "art": [
+   "File:Camillo Miola (Biacca) - The Oracle - 72.PA.32 - J. Paul Getty Museum.jpg",
+   "File:Temple of Apollo in Delphi.jpg",
+   "File:Alexander Consulting the Oracle of Apollo, Louis Jean Francois Lagrenée.jpg",
+   "File:A Greek woman, by Lawrence Alma Tadema.jpg",
+   "File:Costumes religieux RELIGIOUS CLOTHING costumes habit historical christian liturgical clerical ancient Jews orders monks nuns Asian etc PD illustration French encyclopedia Larousse du XXème siècle 1932.jpg",
+   "File:Delphi Temple of Apollo.jpg"
+  ],
+  "date": "2026-11-20T02:37:25.583806+00:00",
+  "status": "posted",
+  "video_id": "2576976196131651",
+  "ig_media_id": "17942728830399953"
  }
 ]
