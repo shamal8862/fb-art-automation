@@ -742,5 +742,34 @@
   "status": "posted",
   "video_id": "1707680904291061",
   "ig_media_id": "18130657789885082"
+ },
+ {
+  "title": "Étienne de Silhouette",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: Have you ever wondered why a shadow profile is called a silh",
+  "date": "2026-11-21T18:32:05.379721+00:00"
+ },
+ {
+  "title": "Daedalus",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: There, King Minos commanded him to construct an inescapable ",
+  "date": "2026-11-21T18:35:54.645137+00:00"
+ },
+ {
+  "title": "Rosetta Stone",
+  "pillar": "history",
+  "art": [
+   "File:Rosetta Stone replica.jpg",
+   "File:Hieroglyphic Limestone Inscription (49345309326).jpg",
+   "File:Description de l'Egypte, Etat Moderne, Plate 87, Views of Qait Bey Fortress and the Diamant Rock, drawn c.1798, published in the Panckoucke edition of 1821-9.jpg",
+   "File:British Museum Reading Room Panorama Feb 2006.jpg",
+   "File:Portrait de Champollion Le Jeune par Madame de Rumilly.jpg"
+  ],
+  "date": "2026-11-21T18:46:23.491111+00:00",
+  "status": "posted",
+  "video_id": "1610661150747196",
+  "ig_media_id": "17907148311606386"
  }
 ]
