@@ -881,5 +881,33 @@
   "status": "posted",
   "video_id": "1149411587710461",
   "ig_media_id": "18131861047880784"
+ },
+ {
+  "title": "Carnac stones",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: In Brittany, thousands of ancient granite stones stand align",
+  "date": "2026-11-23T07:55:36.049894+00:00"
+ },
+ {
+  "title": "Vulcan (mythology)",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: To the ancient Romans, fire was a gift that required careful",
+  "date": "2026-11-23T07:56:38.785877+00:00"
+ },
+ {
+  "title": "Charon",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Those who could not pay the fee were forced to wander the di",
+  "date": "2026-11-23T07:59:11.456593+00:00"
+ },
+ {
+  "title": "Ravens of the Tower of London",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Yet historians believe this royal legend was actually a Vict",
+  "date": "2026-11-23T08:01:43.379164+00:00"
  }
 ]
