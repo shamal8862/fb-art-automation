@@ -945,5 +945,33 @@
   "status": "posted",
   "video_id": "1664160585372939",
   "ig_media_id": "18379795378210247"
+ },
+ {
+  "title": "Elysium",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-23T18:30:58.456064+00:00"
+ },
+ {
+  "title": "Phineas Gage",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-23T18:31:01.011475+00:00"
+ },
+ {
+  "title": "Horseshoe",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-23T18:31:03.631489+00:00"
+ },
+ {
+  "title": "Nemesis",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-23T18:31:08.969217+00:00"
  }
 ]
