@@ -909,5 +909,41 @@
   "status": "skipped",
   "reason": "no suitable art for: Yet historians believe this royal legend was actually a Vict",
   "date": "2026-11-23T08:01:43.379164+00:00"
+ },
+ {
+  "title": "Names of the days of the week",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: Have you ever wondered why our days of the week bear such pe",
+  "date": "2026-11-23T10:32:20.577270+00:00"
+ },
+ {
+  "title": "Styx",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: In reward, Zeus decreed that the most solemn oaths of the go",
+  "date": "2026-11-23T10:34:36.670690+00:00"
+ },
+ {
+  "title": "Tarrare",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-23T10:39:02.079284+00:00"
+ },
+ {
+  "title": "Hygieia",
+  "pillar": "origin",
+  "art": [
+   "File:NAMA 299 Hygieia Epidauros 1.JPG",
+   "File:Palatin Hill - Hygieia tipo Hope - Inv. 1085.jpg",
+   "File:Fragment votive relief Asclepius Hygeia, late 4th c BC, Prague Kinsky, NG P 686, 141034.jpg",
+   "File:Herbal Asclepios rod 5.png",
+   "File:Hope Hygieia in the Museum of Fine Arts, Boston (close-up on upper body).jpg"
+  ],
+  "date": "2026-11-23T10:42:32.060844+00:00",
+  "status": "posted",
+  "video_id": "1664160585372939",
+  "ig_media_id": "18379795378210247"
  }
 ]
