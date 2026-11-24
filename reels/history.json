@@ -1033,5 +1033,33 @@
   "video_id": "1157639790013060",
   "ig_attempts": 1,
   "ig_media_id": "18121211234325742"
+ },
+ {
+  "title": "Halifax Explosion",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Unaware of the danger, curious crowds gathered at windows an",
+  "date": "2026-11-24T18:33:29.161984+00:00"
+ },
+ {
+  "title": "Fork",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-24T18:36:33.959664+00:00"
+ },
+ {
+  "title": "Cupid and Psyche",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-24T18:36:37.566718+00:00"
+ },
+ {
+  "title": "Darien scheme",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Twelve hundred settlers landed in sixteen ninety-eight to bu",
+  "date": "2026-11-24T18:38:50.259902+00:00"
  }
 ]
