@@ -973,5 +973,26 @@
   "status": "skipped",
   "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
   "date": "2026-11-23T18:31:08.969217+00:00"
+ },
+ {
+  "title": "Tanganyika laughter epidemic",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: In 1962, a strange epidemic swept through a girls' boarding ",
+  "date": "2026-11-24T00:04:23.744122+00:00"
+ },
+ {
+  "title": "Four-leaf clover",
+  "pillar": "origin",
+  "art": [
+   "File:A grassland plant, possibly a clover (Trifolium species); Wellcome V0043817.jpg",
+   "File:Four leaf clover (NYPL Hades-464459-1165514).jpg",
+   "File:Walpurgisnacht.jpg",
+   "File:Illustration Trifolium repens cleaned.jpg",
+   "File:Anna-de-Weert-Girl-in-a-Cloverfield-1890.jpg"
+  ],
+  "date": "2026-11-24T00:11:03.969846+00:00",
+  "status": "posted",
+  "video_id": "4534443346809918"
  }
 ]
