@@ -1106,5 +1106,33 @@
   "status": "posted",
   "video_id": "2026383778049977",
   "ig_media_id": "17914433964306801"
+ },
+ {
+  "title": "Baucis and Philemon",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Have you ever heard the Roman myth of two intertwined trees ",
+  "date": "2026-11-25T18:32:52.004625+00:00"
+ },
+ {
+  "title": "Animal trial",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: Imagine stepping into a medieval courtroom, only to find the",
+  "date": "2026-11-25T18:36:17.752130+00:00"
+ },
+ {
+  "title": "Tarot",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: The big shift happened in the late eighteenth century, when ",
+  "date": "2026-11-25T18:41:05.674392+00:00"
+ },
+ {
+  "title": "Pygmalion (mythology)",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: He found his work so exquisite that he fell deeply in love w",
+  "date": "2026-11-25T18:44:44.580335+00:00"
  }
 ]
