@@ -1077,5 +1077,34 @@
   "video_id": "1148200074578473",
   "ig_attempts": 1,
   "ig_media_id": "18030917000921840"
+ },
+ {
+  "title": "Pyramus and Thisbe",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Have you ever wondered why mulberries are a deep, dark red?",
+  "date": "2026-11-25T08:49:37.886115+00:00"
+ },
+ {
+  "title": "South Sea Company",
+  "pillar": "history",
+  "status": "skipped",
+  "reason": "no suitable art for: In 1711, a new British company offered investors wealth from",
+  "date": "2026-11-25T08:50:17.258743+00:00"
+ },
+ {
+  "title": "Chess",
+  "pillar": "origin",
+  "art": [
+   "File:\"Buzurjmihr Masters the Game of Chess\", Folio from a Shahnama (Book of Kings) MET DP108586.jpg",
+   "File:ChessSet.jpg",
+   "File:\"Buzurgmihr Masters the Game of Chess\", Folio from a Shahnama (Book of Kings) MET DP159356.jpg",
+   "File:Die Schachspieler - Les joueurs d'échecs - The Chess Players.jpg",
+   "File:SCELBI 8H Computer.jpg"
+  ],
+  "date": "2026-11-25T08:53:10.838003+00:00",
+  "status": "posted",
+  "video_id": "2026383778049977",
+  "ig_media_id": "17914433964306801"
  }
 ]
