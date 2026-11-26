@@ -1149,5 +1149,35 @@
   "status": "posted",
   "video_id": "896907473467322",
   "ig_media_id": "17944769796389825"
+ },
+ {
+  "title": "Board game",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "script failed fact-check three times",
+  "date": "2026-11-26T02:37:28.640909+00:00"
+ },
+ {
+  "title": "Actaeon",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "no suitable art for: Have you ever heard how the famous Greek hero Actaeon met hi",
+  "date": "2026-11-26T02:40:06.438090+00:00"
+ },
+ {
+  "title": "Pope Joan",
+  "pillar": "history",
+  "art": [
+   "File:Pope alexander VI.jpg",
+   "File:1490 art detail from, Franciscan miscellany in Latin with some Italian - DPLA - (page 45) (cropped).jpg",
+   "File:Woodcut illustration of Pope Joan - Penn Provenance Project.jpg",
+   "File:Pope busts - Duomo - Siena 2016.jpg",
+   "File:David Blondel, G.20418.jpg",
+   "File:Reynolds's Miscellany - Pope Joan or, the female pontiff.jpg"
+  ],
+  "date": "2026-11-26T02:47:37.356523+00:00",
+  "status": "posted",
+  "video_id": "2034673757919453",
+  "ig_media_id": "18153074458477046"
  }
 ]
