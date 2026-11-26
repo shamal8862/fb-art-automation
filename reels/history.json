@@ -1179,5 +1179,35 @@
   "status": "posted",
   "video_id": "2034673757919453",
   "ig_media_id": "18153074458477046"
+ },
+ {
+  "title": "Calendar",
+  "pillar": "origin",
+  "status": "skipped",
+  "reason": "no suitable art for: This financial meaning arose because accounts were settled a",
+  "date": "2026-11-26T08:40:30.693260+00:00"
+ },
+ {
+  "title": "Niobe",
+  "pillar": "myth",
+  "status": "skipped",
+  "reason": "Gemini failed on all models/keys: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+  "date": "2026-11-26T08:40:36.638496+00:00"
+ },
+ {
+  "title": "Man in the Iron Mask",
+  "pillar": "history",
+  "art": [
+   "File:Alphonse de Neuville - Le masque de fer.jpg",
+   "File:La masque de fer.jpg",
+   "File:Portrait Nicolas Fouquet par Charles Le Brun.jpg",
+   "File:The Man in the Iron Mask (Green).png",
+   "File:Bastille Courtyard 1785.jpg",
+   "File:Portrait of Louis XIV of France in Coronation Robes (by Hyacinthe Rigaud) - Louvre Museum.jpg"
+  ],
+  "date": "2026-11-26T08:50:14.785669+00:00",
+  "status": "posted",
+  "video_id": "1500781782163202",
+  "ig_media_id": "17986813640897650"
  }
 ]
